@@ -9,26 +9,60 @@
     </head>
     <body>
         <div class="header">
-            <div class="header-left-section">
-                <div class="header-logo">
-                    <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+            <a class="logo-self-reference" href="">
+                <div class="header-left-section">
+                    <div class="header-logo">
+                        <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+                    </div>
+                    <div class="header-text">
+                        NOMA
+                    </div>
                 </div>
-                <div class="header-text">
-                    NOMA
-                </div>
-            </div>
+            </a>
             <div class="header-navigation">
                 <a class="header-navigation-link" href="">Login</a>
                 <a class="header-navigation-link" href="">Sign Up</a>
             </div>
         </div>
 
-        <div class="introduction-container">
-            <div class="introduction-text">
-                
-            </div>
-            <div class="introduction-image">
+        <div class="color-wrapper">
+            <div class="introduction-container">
 
+                <div class="introduction-text">
+
+                    <h2 class="welcome-header">Welcome to NOMA</h2>
+                    <p>Managing your expenses just got easier! NOMA is your go-to solution for straightforward and effective expense tracking. No frills, just a clean and simple way to stay on top of your spending.</p>
+                    
+                    <div class="introduction-key-features">
+                        <h2>Key features:</h2>
+                        <ul>
+                            <li><strong>Easy Expense Entry:</strong> Quickly log your expenses with just a few clicks. No complex forms or unnecessary details — just the essentials to keep things uncomplicated.</li>
+                            <li><strong>Clear Spending Insights:</strong> See where your money is going at a glance. Our intuitive charts and reports help you understand your spending patterns without any confusion.</li>
+                            <li><strong>Budget Friendly:</strong> Set budgets for different categories and track your progress effortlessly. Get notifications when you're nearing your limits to help you stay within your financial goals.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="introduction-image-container">
+                    <img class="introduction-image" src="{% static 'core/images/welcome-image.jpg' %}" alt="welcome-image">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="introduction-continuation">
+            <div class="introduction-why-choose">
+                <h2>Why Choose NOMA?</h2>
+                <ul>
+                    <li><strong>No Cost, No Ads:</strong> NOMA is absolutely free to use, with no hidden costs or annoying advertisements. Enjoy a clean, ad-free experience while you take control of your finances.</li>
+                    <li><strong>User-Friendly Design:</strong> Our interface is designed with simplicity in mind. No steep learning curve—start tracking your expenses right away.</li>
+                    <li><strong>Accessible Anywhere:</strong> Whether you're at home or on the go, access your expense data from any device. Your financial information is always at your fingertips.</li>
+                </ul>
+            </div>
+            <div class="introduction-getting-started">
+                <h2>Getting Started</h2>
+                <p>Ready to take control of your finances? <a href="">Sign up</a> now and start your journey towards better money management. If you're already part of the NOMA community, simply <a href="">log in</a> to continue tracking your expenses effortlessly.</p>
             </div>
         </div>
 
