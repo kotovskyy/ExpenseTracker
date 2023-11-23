@@ -64,10 +64,6 @@ class Category(models.Model):
         choices=CATEGORY_TYPE_CHOICES,
         default=EXPENSE
     )
-    total = models.DecimalField(
-        max_digits=22,
-        decimal_places=2,
-    )
     
     def __str__(self) -> str:
         return f"{self.name} - {self.total} \
