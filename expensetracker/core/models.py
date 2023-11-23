@@ -66,8 +66,7 @@ class Category(models.Model):
     )
     
     def __str__(self) -> str:
-        return f"{self.name} - {self.total} \
-            {self.user.settings.first().main_currency.code}"
+        return f"{self.user.username} {self.name}"
 
 
 class Account(models.Model):
@@ -151,4 +150,4 @@ class Transaction(models.Model):
         elif self.transaction_type == self.TRANSFER:
             amount_sign = ""
         return f"{self.category.name} {self.account.name} \
-                {amount_sign + str(self.amount)} {self.description}"
+                {amount_sign + str(self.amount)} {self.currency.code}"
