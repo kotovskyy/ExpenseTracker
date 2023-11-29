@@ -11,7 +11,7 @@
     font-size: 65px;
     letter-spacing: 4px;
     font-weight: bold;
-    color: #f1916d;
+    color: #f5d7db;
     margin-bottom: 10px;
 }
 
@@ -21,7 +21,7 @@
     align-items: center;
     justify-content: left;
     background-color: rgba(190, 131, 185, 0.8);
-    padding: 100px 200px 100px 200px;
+    padding: 80px 200px 100px 200px;
     border-radius: 15px;
     border: 2px solid #1b3358;
 }
@@ -117,5 +117,11 @@
     accent-color: #1b3358;
     background-color: #1b3358;
     border-radius: 5px;
+}
+
+.error-message {
+    font-size: 22px;
+    color: #f1916d;
+    padding: 5px 5px 5px 5px;
 }
 

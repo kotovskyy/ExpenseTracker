@@ -20,8 +20,12 @@
                 </div>
             </a>
             <div class="header-navigation">
+                {% if not logged_in %}
                 <a class="header-navigation-link" href="{% url 'users_userLogin' %}">Login</a>
                 <a class="header-navigation-link" href="{% url 'users_userSignUp' %}">Sign Up</a>
+                {% else %}
+                <a class="header-navigation-link" href="{% url 'users_userSignOut' %}">Sign Out</a>
+                {% endif %}
             </div>
         </div>
 
