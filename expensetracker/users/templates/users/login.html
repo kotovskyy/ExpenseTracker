@@ -1,4 +1,52 @@
 {% load static %}
-<div id="login" class="page">
-    <h2>NOMA login page</h2>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
+        <link rel="stylesheet" href="{% static 'users/styles/register.css' %}">
+        <title>Login</title>
+    </head>
+    <body>
+        <div class="header">
+            <a class="logo-self-reference" href="{% url 'core_index' %}">
+                <div class="header-left-section">
+                    <div class="header-logo">
+                        <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+                    </div>
+                    <div class="header-text">
+                        NOMA
+                    </div>
+                </div>
+            </a>
+            <div class="header-navigation">
+                <a class="header-navigation-link" href="{% url 'users_userLogin' %}">Login</a>
+                <a class="header-navigation-link" href="{% url 'users_userSignUp' %}">Sign Up</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h2 id="login-header">Login</h2>
+            <form class="auth-form" action="{% url 'users_userLogin' %}" method="post" autocomplete="off">
+                {% csrf_token %}
+                <div class="form-field-name-text">
+                    Email or username:
+                </div>
+                <input class="auth-form-field" name="email_or_username" type="text" placeholder="Email or username">
+                <div class="form-field-name-text">
+                    Password:
+                </div>
+                <input class="auth-form-field" name="password" type="password" placeholder="Password"> 
+                <div class="auth-form-footer">
+                    <div class="remember-me-container">
+                        <input class="checkbox remember-me-checkbox" type="checkbox" name="remember_me">
+                        <div class="remember-me-text">Remember Me</div>
+                    </div>
+                    <input class="auth-submit-button" type="submit" value="Login">
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>
