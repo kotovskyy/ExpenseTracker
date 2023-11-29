@@ -1,17 +1,16 @@
 from django.shortcuts import render
-from .forms import (UserCreationForm)
+from .forms import (SignupForm)
 
 def userLogin(request):
     if request.method == 'POST':
         pass
-    form = UserCreationForm()
-    return render(request, 'users/login.html', context={
-        'form': form,
-    })
+    return render(request, 'users/login.html')
 
 def userSignUp(request):
     if request.method == 'POST':
         pass
-    return render(request, 'users/signup.html')
-
+    form = SignupForm()
+    return render(request, 'users/signup.html', context={
+        'form': form,
+    })
 

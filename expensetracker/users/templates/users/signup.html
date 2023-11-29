@@ -1,11 +1,72 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sign Up</title>
+        <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
+        <link rel="stylesheet" href="{% static 'users/styles/register.css' %}">
+        <link rel="stylesheet" href="{% static 'users/styles/signup.css' %}">
+        <title>Login</title>
     </head>
     <body>
-        <h2>NOMA sign up page</h2>
+        <div class="header">
+            <a class="logo-self-reference" href="{% url 'core_index' %}">
+                <div class="header-left-section">
+                    <div class="header-logo">
+                        <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+                    </div>
+                    <div class="header-text">
+                        NOMA
+                    </div>
+                </div>
+            </a>
+            <div class="header-navigation">
+                <a class="header-navigation-link" href="{% url 'users_userLogin' %}">Login</a>
+                <a class="header-navigation-link" href="{% url 'users_userSignUp' %}">Sign Up</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h2 id="login-header">Sign Up</h2>
+            <form class="auth-form" action="{% url 'users_userSignUp' %}" method="post" autocomplete="off">
+                {% csrf_token %}
+                
+                <div class="form-field-name-text">
+                    Username:
+                </div>
+                {% for error in form.username.errors %}
+                <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                {{ form.username }}
+
+                <div class="form-field-name-text">
+                    Email:
+                </div>
+                {% for error in form.username.errors %}
+                <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                {{ form.email }}
+
+                <div class="form-field-name-text">
+                    Password:
+                </div>
+                {% for error in form.username.errors %}
+                <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                {{ form.password1 }}
+
+                <div class="form-field-name-text">
+                    Confirm password:
+                </div>
+                {% for error in form.username.errors %}
+                <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                {{ form.password2 }}
+
+                <input class="auth-submit-button" type="submit" value="Sign Up">
+            </form>
+        </div>
+
     </body>
 </html>
