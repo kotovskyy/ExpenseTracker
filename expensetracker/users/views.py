@@ -24,7 +24,7 @@ def userLogin(request):
             if not remember_me:
                 request.session.set_expiry(0)
             
-            return HttpResponseRedirect(reverse('core_index'))
+            return HttpResponseRedirect(reverse('core_categories'))
         else:
             return render(request, "users/login.html", context={
                 "message": "Invalid username or password",
