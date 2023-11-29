@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/mainapp.css' %}">
+        <title>NOMA</title>
+    </head>
+    <body>
+        <div class="header">
+            <a class="logo-self-reference" href="{% url 'core_index' %}">
+                <div class="header-left-section">
+                    <div class="header-logo">
+                        <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+                    </div>
+                    <div class="header-text">
+                        NOMA
+                    </div>
+                </div>
+            </a>
+            <div class="header-navigation">
+                <a class="header-navigation-link" href="{% url 'users_userSignOut' %}">Sign Out</a>
+            </div>
+        </div>
+
+        <div id="content">
+            
+            <div class="app-navigation-container">
+                <div class="app-navigation-link">
+                    Accounts
+                </div>
+                <a>
+                <div class="app-navigation-link active-nav-link">
+                    Categories
+                </div>
+                </a>
+                <div class="app-navigation-link">
+                    Transactions
+                </div>
+            </div>
+
+            <div class="main-categories-container">
+                {% for category in categories %}
+                <div class="category-container">
+                    {{ category }}
+                </div>
+                {% endfor %}
+
+                <div class="central-info-container">
+                    <div class="central-info-label">
+                        Expenses
+                    </div>
+                    <div class="total-data total-exenses">
+                        1234.56 PLN
+                    </div>
+                    <div class="total-data total-exenses">
+                        6543.21 PLN
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        
+
+    </body>
+</html>
