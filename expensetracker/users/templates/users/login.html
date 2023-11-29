@@ -28,8 +28,14 @@
 
         <div id="content">
             <h2 id="login-header">Login</h2>
+            
             <form class="auth-form" action="{% url 'users_userLogin' %}" method="post" autocomplete="off">
                 {% csrf_token %}
+                {% if message %}
+                <div class="error-message">
+                    {{ message }}
+                </div>
+                {% endif %}
                 <div class="form-field-name-text">
                     Email or username:
                 </div>
