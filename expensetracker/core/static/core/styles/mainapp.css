@@ -1,6 +1,6 @@
 #content {
     padding-top: 0px;
-    margin-top: 80px;
+    margin-top: 148px;
 }
 
 .app-navigation-container {
@@ -13,6 +13,14 @@
     padding-bottom: 10px;
 
     background-color: #1b3358;
+}
+
+.app-navigation-container {
+    position: fixed;
+    z-index: 101;
+    top: 80px;
+    right: 0px;
+    left: 0px;
 }
 
 .app-navigation-container a {

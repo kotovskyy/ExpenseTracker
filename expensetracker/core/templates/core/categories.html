@@ -26,26 +26,26 @@
             </div>
         </div>
 
-        <div id="content">
-            
-            <div class="app-navigation-container">
-                <a href="{% url 'core_accounts' %}">
-                    <div class="app-navigation-link">
-                        Accounts
-                    </div>
-                </a>
-                <a href="{% url 'core_categories' %}">
-                    <div class="app-navigation-link active-nav-link">
-                        Categories
-                    </div>
-                </a>
-                <a href="{% url 'core_transactions' %}">
-                    <div class="app-navigation-link">
-                        Transactions
-                    </div>
-                </a>    
-            </div>
+        <div class="app-navigation-container">
+            <a href="{% url 'core_accounts' %}">
+                <div class="app-navigation-link">
+                    Accounts
+                </div>
+            </a>
+            <a href="{% url 'core_categories' %}">
+                <div class="app-navigation-link active-nav-link">
+                    Categories
+                </div>
+            </a>
+            <a href="{% url 'core_transactions' %}">
+                <div class="app-navigation-link">
+                    Transactions
+                </div>
+            </a>    
+        </div>
 
+        <div id="content">
+    
             <div class="main-categories-container">
                 {% for category in categories %}
                 <button class="category-container-button" onclick="openCategoryPage('{{ category.id }}')">
