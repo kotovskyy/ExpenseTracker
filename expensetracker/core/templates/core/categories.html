@@ -28,17 +28,21 @@
         <div id="content">
             
             <div class="app-navigation-container">
-                <div class="app-navigation-link">
-                    Accounts
-                </div>
-                <a>
-                <div class="app-navigation-link active-nav-link">
-                    Categories
-                </div>
+                <a href="{% url 'core_accounts' %}">
+                    <div class="app-navigation-link">
+                        Accounts
+                    </div>
                 </a>
-                <div class="app-navigation-link">
-                    Transactions
-                </div>
+                <a href="{% url 'core_categories' %}">
+                    <div class="app-navigation-link active-nav-link">
+                        Categories
+                    </div>
+                </a>
+                <a href="{% url 'core_transactions' %}">
+                    <div class="app-navigation-link">
+                        Transactions
+                    </div>
+                </a>    
             </div>
 
             <div class="main-categories-container">

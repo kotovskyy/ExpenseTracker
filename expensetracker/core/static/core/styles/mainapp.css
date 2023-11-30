@@ -15,6 +15,11 @@
     background-color: #1b3358;
 }
 
+.app-navigation-container a {
+    text-decoration: none;
+    color: #f5d7db;
+}
+
 .app-navigation-link {
     /* border: 2px solid #f1916d; */
     border-bottom: 2px solid #f1916d;
@@ -109,26 +114,43 @@
     justify-content: space-around;
 
     cursor: pointer;
+    padding: 10px;
+    transition: padding 0.2s;
+}
+
+.category-container:hover {
+    padding: 0px;
 }
 
 .category-icon-container {
     background-color: #f1916d;
     border-radius: 100%;
+    margin: 10px;
+    transition: margin 0.2s;
+}
+
+.category-icon-container:hover {
+    margin: 5px;
 }
 
 .category-icon {
     height: 80px;
     width: 80px;
     padding: 15px;
+
+    transition: height 0.15s, width 0.15s, padding 0.15s;
+}
+
+.category-icon:hover {
+    height: 90px;
+    width: 90px;
 }
 
 .category-name{
     font-size: 22px;
-    margin-bottom: 10px;
 }
 
 .category-total {
     font-size: 18px;
-    margin-top: 10px;
 }
 
