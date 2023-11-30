@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
         <link rel="stylesheet" href="{% static 'core/styles/mainapp.css' %}">
+        <script src="{% static 'core/scripts/categories.js' %}"></script>
         <title>NOMA</title>
     </head>
     <body>
@@ -47,18 +48,19 @@
 
             <div class="main-categories-container">
                 {% for category in categories %}
-                <div class="category-container">
-                    <div class="category-name">
-                        {{ category.name}}
+                <button class="category-container-button" onclick="openCategoryPage('{{ category.id }}')">
+                    <div class="category-container">
+                        <div class="category-name">
+                            {{ category.name}}
+                        </div>
+                        <div class="category-icon-container">
+                            <img class="category-icon" src="{% static 'core/svg/groceries.svg' %}" alt="category image">
+                        </div>
+                        <div class="category-total">
+                            1234.56 PLN
+                        </div> 
                     </div>
-                    <div class="category-icon-container">
-                        <img class="category-icon" src="{% static 'core/svg/groceries.svg' %}" alt="category image">
-                    </div>
-                    <div class="category-total">
-                        1234.56 PLN
-                    </div>
-                    
-                </div>
+                </button>
                 {% endfor %}
 
                 <div id="central-info-container">
