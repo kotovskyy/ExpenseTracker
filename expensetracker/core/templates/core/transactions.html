@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
         <link rel="stylesheet" href="{% static 'core/styles/mainapp.css' %}">
         <link rel="stylesheet" href="{% static 'core/styles/accounts.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/transactions.css' %}">
         <title>NOMA</title>
     </head>
     <body>
@@ -30,7 +31,7 @@
             
             <div class="app-navigation-container">
                 <a href="{% url 'core_accounts' %}">
-                    <div class="app-navigation-link active-nav-link">
+                    <div class="app-navigation-link">
                         Accounts
                     </div>
                 </a>
@@ -40,7 +41,7 @@
                     </div>
                 </a>
                 <a href="{% url 'core_transactions' %}">
-                    <div class="app-navigation-link">
+                    <div class="app-navigation-link active-nav-link">
                         Transactions
                     </div>
                 </a>    
@@ -49,34 +50,46 @@
             <div class="main-items-container">
                 <div class="container-header">
                     <div class="items-header-label">
-                        Accounts:
-                    </div>
-                    <div class="account-total-balance">
-                        10231.45 PLN
+                        Transactions:
                     </div>
                 </div>
-                {% for account in accounts %}
+                {% for transaction in transactions %}
                     <div class="item-container">
                         <div class="item-data-container">
                             <div class="item-icon-container">
-                                <img class="item-icon" src="{% static 'core/svg/account.svg' %}" alt="account icon">
+                                <img class="item-icon" src="{% static 'core/svg/account.svg' %}" alt="transaction icon">
                             </div>
                             <div class="item-name-description">
                                 <div class="item-name">
-                                    {{ account.name }}
+                                    {{ transaction.category.name }}
+                                </div>
+                                <div class="item-account">
+                                    {{ transaction.account.name }}
                                 </div>
                                 <div class="item-description">
-                                    {{ account.description }}
+                                    {{ transaction.description }}
                                 </div>
                             </div>
                         </div>
-                        <div class="item-balance">
-                            {{ account.balance }} {{ account.currency.code }}
+                        {% if transaction.transaction_type == "E" %}
+                        <div class="item-balance expense-amount">
+                            - {{ transaction.amount }} {{ transaction.currency.code }}
                         </div>
+                        {% elif transaction.transaction_type == "I"%}
+                        <div class="item-balance income-amount">
+                            + {{ transaction.amount }} {{ transaction.currency.code }}
+                        </div>
+                        {% else %}
+                        <div class="item-balance transfer-amount">
+                            - {{ transaction.amount }} {{ transaction.currency.code }}
+                        </div>
+                        {% endif %}
+
                     </div>
                 {% endfor %}
             </div>
-
+            
+            
         </div>
         
 

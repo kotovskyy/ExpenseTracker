@@ -1,4 +1,4 @@
-.main-accounts-container {
+.main-items-container {
     display: flex;
     flex-direction: column;
     align-items: top;
@@ -15,13 +15,13 @@
     align-items: center;
     justify-content: space-between;
 
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     padding-bottom: 5px;
 
     border-bottom: 2px solid #06142e;
 }
 
-.accounts-header-label {
+.items-header-label {
     font-size: 36px;
     letter-spacing: 5px;
 } 
@@ -30,7 +30,7 @@
     font-size: 30px;
 }
 
-.account-container {
+.item-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -42,34 +42,39 @@
     border: 2px solid #06142e;
     border-radius: 20px;
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 8px auto 8px auto;
 
-    margin-bottom: 15px;
+    transition: padding 0.1s, margin 0.1s, width 0.2s, background-color 0.2s;
 }
 
-.account-data-container{
+.item-container:hover {
+    background-color: #f1916d;
+    padding: 15px 50px 15px 50px;
+    margin: 3px auto 3px auto;
+    width: 94%;
+}
+
+.item-data-container{
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-right: 50px;
 }
 
-.account-name-description {
+.item-name-description {
     display: flex;
     flex-direction: column;
     align-items: baseline;
     justify-content: space-around;
-
 }
 
-.account-name {
+.item-name {
     font-size: 30px;
     margin-left: 20px;
     margin-bottom: 7px;
 }
 
-.account-description {
+.item-description {
     max-width: 350px;
     overflow: hidden;
     white-space: nowrap;
@@ -77,18 +82,18 @@
 }
 
 
-.account-balance {
+.item-balance {
     font-size: 26px;
 }
 
-.account-icon-container {
+.item-icon-container {
     box-sizing: border-box;
     background-color: #bd83b8;
     padding: 7px;
 
     border-radius: 100%;
 }
-.account-icon {
+.item-icon {
     height: 75px;
     width: 80px;
 }
