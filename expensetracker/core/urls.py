@@ -6,4 +6,5 @@ urlpatterns = [
     path('categories/', views.categories, name='core_categories'),
     path('accounts/', views.accounts, name='core_accounts'),
     path('transactions/', views.transactions, name='core_transactions'),
+    path('categories/<int:category_id>/', views.category, name='core_category'),
 ]

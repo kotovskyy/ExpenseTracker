@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/mainapp.css' %}">
+        <title>NOMA</title>
+    </head>
+    <body>
+        <div class="header">
+            <a class="logo-self-reference" href="{% url 'core_index' %}">
+                <div class="header-left-section">
+                    <div class="header-logo">
+                        <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+                    </div>
+                    <div class="header-text">
+                        NOMA
+                    </div>
+                </div>
+            </a>
+            <div class="header-navigation">
+                <a class="header-navigation-link" href="{% url 'users_userSignOut' %}">Sign Out</a>
+            </div>
+        </div>
+
+        <div id="content">
+            
+            <div class="app-navigation-container">
+                <a href="{% url 'core_accounts' %}">
+                    <div class="app-navigation-link">
+                        Accounts
+                    </div>
+                </a>
+                <a href="{% url 'core_categories' %}">
+                    <div class="app-navigation-link">
+                        Categories
+                    </div>
+                </a>
+                <a href="{% url 'core_transactions' %}">
+                    <div class="app-navigation-link">
+                        Transactions
+                    </div>
+                </a>    
+            </div>
+
+
+        
+        </div>
+        
+
+    </body>
+</html>

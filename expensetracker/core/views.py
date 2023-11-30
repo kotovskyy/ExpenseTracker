@@ -30,3 +30,10 @@ def transactions(request):
     return render(request, 'core/transactions.html', context={
         'transactions': transactions,
     })
+
+@login_required
+def category(request, category_id):
+    user = request.user
+    return render(request, 'core/category.html', context={
+        
+    })
