@@ -70,7 +70,7 @@
 }
 
 #central-info {
-    border: 7px solid #bd83b8;
+    border: 7px solid #f1916d;
     text-align: center;
     height: 155px;
     display: flex;
@@ -115,7 +115,7 @@
 
     cursor: pointer;
     padding: 10px;
-    transition: padding 0.2s;
+    transition: padding 0.1s;
 }
 
 .category-container:hover {
@@ -123,26 +123,27 @@
 }
 
 .category-icon-container {
-    background-color: #f1916d;
+    background-color: #bd83b8;
     border-radius: 100%;
     margin: 10px;
-    transition: margin 0.2s;
+    transition: margin 0.1s;
 }
 
 .category-icon-container:hover {
     margin: 5px;
+    background-color: #f1916d;
 }
 
 .category-icon {
-    height: 80px;
+    height: 75px;
     width: 80px;
     padding: 15px;
 
-    transition: height 0.15s, width 0.15s, padding 0.15s;
+    transition: height 0.1s, width 0.1s, padding 0.1s;
 }
 
 .category-icon:hover {
-    height: 90px;
+    height: 85px;
     width: 90px;
 }
 
