@@ -1,0 +1,94 @@
+.main-accounts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    min-width: 500px;
+    padding-top: 20px;
+}
+
+.container-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+
+    border-bottom: 2px solid #06142e;
+}
+
+.accounts-header-label {
+    font-size: 36px;
+    letter-spacing: 5px;
+} 
+
+.account-total-balance {
+    font-size: 30px;
+}
+
+.account-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 10px 50px 10px 50px;
+
+    background-color: #1b3358;
+    border: 2px solid #06142e;
+    border-radius: 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-bottom: 15px;
+}
+
+.account-data-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.account-name-description {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-around;
+
+}
+
+.account-name {
+    font-size: 30px;
+    margin-left: 20px;
+    margin-bottom: 7px;
+}
+
+.account-description {
+    max-width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.account-balance {
+    font-size: 26px;
+}
+
+.account-icon-container {
+    box-sizing: border-box;
+    background-color: #bd83b8;
+    padding: 7px;
+
+    border-radius: 100%;
+}
+.account-icon {
+    height: 75px;
+    width: 80px;
+}

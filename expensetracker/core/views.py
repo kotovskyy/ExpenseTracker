@@ -7,7 +7,6 @@ def index(request):
         "logged_in" : request.user.is_authenticated,
     })
 
-
 @login_required
 def categories(request):
     user = request.user
@@ -15,4 +14,19 @@ def categories(request):
     return render(request, 'core/categories.html', context={
         'categories': categories,
     })
-
+    
+@login_required
+def accounts(request):
+    user = request.user
+    accounts = user.accounts.all().order_by('id')
+    return render(request, 'core/accounts.html', context={
+        'accounts': accounts,
+    })
+    
+@login_required
+def transactions(request):
+    user = request.user
+    transactions = user.transactions.all().order_by('id')
+    return render(request, 'core/transactions.html', context={
+        'transactions': transactions,
+    })

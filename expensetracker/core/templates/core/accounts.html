@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/mainapp.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/accounts.css' %}">
+        <title>NOMA</title>
+    </head>
+    <body>
+        <div class="header">
+            <a class="logo-self-reference" href="{% url 'core_index' %}">
+                <div class="header-left-section">
+                    <div class="header-logo">
+                        <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+                    </div>
+                    <div class="header-text">
+                        NOMA
+                    </div>
+                </div>
+            </a>
+            <div class="header-navigation">
+                <a class="header-navigation-link" href="{% url 'users_userSignOut' %}">Sign Out</a>
+            </div>
+        </div>
+
+        <div id="content">
+            
+            <div class="app-navigation-container">
+                <a href="{% url 'core_accounts' %}">
+                    <div class="app-navigation-link active-nav-link">
+                        Accounts
+                    </div>
+                </a>
+                <a href="{% url 'core_categories' %}">
+                    <div class="app-navigation-link">
+                        Categories
+                    </div>
+                </a>
+                <a href="{% url 'core_transactions' %}">
+                    <div class="app-navigation-link">
+                        Transactions
+                    </div>
+                </a>    
+            </div>
+
+            <div class="main-accounts-container">
+                <div class="container-header">
+                    <div class="accounts-header-label">
+                        Accounts:
+                    </div>
+                    <div class="account-total-balance">
+                        10231.45 PLN
+                    </div>
+                </div>
+                {% for account in accounts %}
+                    <div class="account-container">
+                        <div class="account-data-container">
+                            <div class="account-icon-container">
+                                <img class="account-icon" src="{% static 'core/svg/account.svg' %}" alt="account icon">
+                            </div>
+                            <div class="account-name-description">
+                                <div class="account-name">
+                                    {{ account.name }}
+                                </div>
+                                <div class="account-description">
+                                    {{ account.description }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-balance">
+                            {{ account.balance }} {{ account.currency.code }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        
+
+    </body>
+</html>
