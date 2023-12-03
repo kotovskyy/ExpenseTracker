@@ -19,12 +19,16 @@
     padding-bottom: 5px;
 
     border-bottom: 2px solid #06142e;
+
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .items-header-label {
     font-size: 36px;
     letter-spacing: 5px;
 } 
+
 
 .account-total-balance {
     font-size: 30px;
@@ -45,6 +49,11 @@
     margin: 8px auto 8px auto;
 
     transition: padding 0.1s, margin 0.1s, width 0.2s, background-color 0.2s;
+}
+
+.main-items-container a {
+    text-decoration: none;
+    color: #f5d7db;
 }
 
 .item-container:hover {

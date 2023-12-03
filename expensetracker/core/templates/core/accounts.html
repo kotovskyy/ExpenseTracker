@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="header">
-            <a class="logo-self-reference" href="{% url 'core_index' %}">
+            <a class="logo-self-reference" href="{% url 'core_categories' %}">
                 <div class="header-left-section">
                     <div class="header-logo">
                         <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
@@ -56,24 +56,26 @@
                     </div>
                 </div>
                 {% for account in accounts %}
-                    <div class="item-container">
-                        <div class="item-data-container">
-                            <div class="item-icon-container">
-                                <img class="item-icon" src="{% static 'core/svg/account.svg' %}" alt="account icon">
+                    <a href="{% url 'core_account' account.id %}">
+                        <div class="item-container">
+                            <div class="item-data-container">
+                                <div class="item-icon-container">
+                                    <img class="item-icon" src="{% static 'core/svg/account.svg' %}" alt="account icon">
+                                </div>
+                                <div class="item-name-description">
+                                    <div class="item-name">
+                                        {{ account.name }}
+                                    </div>
+                                    <div class="item-description">
+                                        {{ account.description }}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item-name-description">
-                                <div class="item-name">
-                                    {{ account.name }}
-                                </div>
-                                <div class="item-description">
-                                    {{ account.description }}
-                                </div>
+                            <div class="item-balance">
+                                {{ account.balance }} {{ account.currency.code }}
                             </div>
                         </div>
-                        <div class="item-balance">
-                            {{ account.balance }} {{ account.currency.code }}
-                        </div>
-                    </div>
+                    </a>
                 {% endfor %}
             </div>
 

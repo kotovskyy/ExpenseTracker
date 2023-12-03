@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="{% static 'core/styles/transactionForm.css' %}">
         <link rel="stylesheet" href="{% static 'core/styles/accounts.css' %}">
         <link rel="stylesheet" href="{% static 'core/styles/transactions.css' %}">
-        <script src="{% static 'core/scripts/categories.js' %}"></script>
         <script src="{% static 'core/scripts/transactionForm.js' %}"></script>
         <title>NOMA</title>
     </head>
@@ -54,21 +53,44 @@
                 <div class="add-transaction-container">
                     <div class="container-header">
                         <div class="items-header-label">
-                            Category: {{ category.name}}
+                            Account: {{ account.name}}
                         </div>
                     </div>
                     <div class="add-new-form-container">
-                        <form id="addCategoryTransactionForm_{{ category_id }}" action="{% url 'core_category' category.id %}" method="post" autocomplete="off">
+                        <form action="{% url 'core_account' account.id %}" method="post" autocomplete="off">
                             <h2>New transaction:</h2>
                             {% csrf_token %}
                             <div class="form-label-field">
                                 <div class="form-field-name">
-                                    From:
+                                    Type:
                                 </div>
                                 {% for error in form.account.errors %}
                                     <div class="error-message">{{ error }}</div>
                                 {% endfor %}
-                                {{ form.account }}
+                                {{ form.transaction_type }}
+                            </div>
+
+                            <div class="form-label-field">
+                                <div class="form-field-name" id="where-to-label">
+                                    To:
+                                </div>
+                                {% for error in form.category.errors %}
+                                    <div class="error-message">{{ error }}</div>
+                                {% endfor %}
+                                <!-- {{ form.category }} -->
+                                
+                                <select name="category" id="id_category" class="form-field"> 
+                                    {% for opt in opt_by_type.E %}
+                                        <option value="{{ opt.id }}" data-type="E" style="display: block">{{ opt.name }}</option>
+                                    {% endfor %}
+                                    {% for opt in opt_by_type.I %}
+                                        <option value="{{ opt.id }}" data-type="I" style="display: none;">{{ opt.name }}</option>
+                                    {% endfor %}
+                                    {% for opt in opt_by_type.T %}
+                                        <option value="{{ opt.id }}" data-type="T" style="display: none;">{{ opt.name }}</option>
+                                    {% endfor %}
+                                </select>
+
                             </div>
 
                             <div class="form-label-field">
@@ -112,37 +134,7 @@
                         </form>
                     </div>
                     <div class="edit-item-form-container">
-                        <form id="editCategoryForm_{{ category.id }}" action="{% url 'core_editCategory' category.id %}" method="post" autocomplete="off">
-                            <h2>Category settings:</h2>
-                            {% csrf_token %}
 
-                            <div class="form-label-field">
-                                <div class="form-field-name">
-                                    Name:
-                                </div>
-                                {% for error in edit_form.name.errors %}
-                                    <div class="error-message">{{ error }}</div>
-                                {% endfor %}
-                                {{ edit_form.name }}
-                            </div>
-
-                            <div class="form-label-field">
-                                <div class="form-field-name">
-                                    Type:
-                                </div>
-                                {% for error in edit_form.category_type.errors %}
-                                    <div class="error-message">{{ error }}</div>
-                                {% endfor %}
-                                {{ edit_form.category_type }}
-                            </div>
-                        </form>
-                        <form id="deleteCategoryForm_{{ category.id }}" action="{% url 'core_deleteCategory' category.id %}" method="post">
-                            {% csrf_token %}
-                        </form>
-                        <div class="form-buttons">
-                            <input type="button" class="form-button" value="Edit" onclick="editCategory('{{ category.id }}')">
-                            <input type="button" class="form-button" value="Delete category" onclick="deleteCategory('{{ category.id }}', '{{ n_transactions }}')">
-                        </div>
                     </div>
                 </div>
             </div>

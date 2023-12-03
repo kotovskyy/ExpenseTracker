@@ -31,7 +31,7 @@
     font-size: 24px;
     text-align: left;
     margin-bottom: 13px;
-    color: #1b3358;
+    color: #f5d7db;
 }
 
 .auth-form-field {
@@ -65,7 +65,7 @@
 .auth-form-field:focus {
     outline: none;
     background-color: #bd83b8;
-    border: 3px solid #1b3358;
+    border: 3px solid #f1916d;
     padding: 13px 58px 13px 58px;
 }
 

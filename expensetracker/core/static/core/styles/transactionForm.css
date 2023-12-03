@@ -1,0 +1,230 @@
+body {
+    overflow: hidden;
+    display: flex;
+}
+
+#content {
+    width: 100%;
+    display: flex;
+    height: 100vh;
+    margin-top: 160px;
+}
+
+.left-page-part {
+    width: 49%;
+    height: 100%;
+    box-sizing: border-box;
+    border-right: 2px solid #bd83b8;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+
+.right-page-part {
+    overflow: auto;
+    flex: 1;
+    box-sizing: border-box;
+    padding-bottom: 200px;
+}
+
+.add-transaction-container {
+    width: 100%;
+    overflow-y: auto;
+}
+
+.container-header {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.add-new-form-container, .edit-item-form-container {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.form-label-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-field-name {
+    width: 210px;
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: 13px;
+    color: #f5d7db;
+    margin-left: 15px;
+}
+
+.form-field {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+
+    width: 450px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-radius: 40px;
+    padding: 10px 60px 10px 60px;
+
+    color: #06142E;
+
+    background-color: #bd83b8;
+    border: 2px solid #1b3358;
+
+    transition: background-color 0.2s;
+    margin-right: 15px;
+}
+
+.form-field:hover {
+    background-color: #f1916d;
+}
+
+.form-field:focus {
+    padding: 9px 59px 9px 59px;
+    border: 3px solid #f1916d;
+}
+
+.amount-currency-form {
+    display: flex;
+    flex-direction: row;
+    width: 450px;
+    box-sizing: border-box;
+}
+
+
+.amount-field {
+    box-sizing: border-box;
+    width: 325px;
+    border-radius: 0px;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-right: none;
+    text-align: right;
+    padding: 9px 20px 9px 59px;
+    margin-right: 0px;
+}
+
+.amount-field:hover{
+    background-color: #f1916d;
+    border-color: #f1916d;
+}
+
+.amount-field:focus{
+    background-color: #f1916d;
+    border-color: #1b3358;
+}
+
+.currency-field:hover{
+    background-color: #f1916d;
+    border-color: #f1916d;
+}
+
+.currency-field:focus{
+    background-color: #f1916d;
+    border-color: #1b3358;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.currency-field {
+    box-sizing: border-box;
+    width: 100px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-left: none;
+
+    border-radius: 0px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    text-align: center;
+}
+
+.submit-button {
+    letter-spacing: 5px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    padding: 12px 20px 12px 20px;
+    margin-bottom: 0px;
+
+    color: #f5d7db;
+    background-color: #bd83b8; 
+    border: 2px solid #1b3358;
+    border: none;
+
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #f1916d;
+}
+
+.items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    min-width: 500px;
+    padding-top: 20px;
+    overflow: auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.form-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-button {
+    letter-spacing: 5px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 12px 20px 12px 20px;
+    margin: 0px 10px 0px 10px;
+
+    color: #f5d7db;
+    background-color: #bd83b8; 
+    border: 2px solid #1b3358;
+    border: none;
+
+    transition: background-color 0.2s;
+}
+
+.form-button:hover {
+    background-color: #f1916d;
+}
