@@ -63,6 +63,17 @@
                 </button>
                 {% endfor %}
 
+                <a href="{% url 'core_addCategory' %}">
+                    <div class="add-category-container">
+                        <div class="add-category-icon-container">
+                            <img class="add-category-icon" src="{% static 'core/svg/add-icon.svg' %}" alt="add category icon">
+                        </div>
+                        <div class="add-category-label">
+                            Add new category
+                        </div>
+                    </div>
+                </a>
+
                 <div id="central-info-container">
                     <div id="central-info">
                         <div class="central-info-label">
