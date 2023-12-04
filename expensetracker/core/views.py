@@ -4,8 +4,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import (Currency,
                      Transaction,
-                     Account)
+                     Account,
+                     Category)
 from .forms import (AddNewAccountForm,
+                    AddNewCategoryForm,
                     AddTransactionCategoryForm,
                     AddTransactionAccountForm,
                     EditCategoryForm,
@@ -143,6 +145,32 @@ def deleteCategory(request, category_id):
         
     return HttpResponseRedirect(reverse('core_categories'))
 
+@login_required
+def addCategory(request):
+    user = request.user
+    if request.method == 'POST':
+        form = AddNewCategoryForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            category_type = form.cleaned_data['category_type']
+            
+            category = Category.objects.create(
+                user=user,
+                name=name.capitalize(),
+                category_type=category_type
+            )
+            
+            return HttpResponseRedirect(reverse('core_categories'))
+            
+        else:
+            return render(request, 'core/add_category.html', context={
+                'form': form,
+            })
+        
+    form = AddNewCategoryForm()
+    return render(request, 'core/add_category.html', context={
+        'form': form,
+    })
 
 @login_required
 def account(request, account_id):
