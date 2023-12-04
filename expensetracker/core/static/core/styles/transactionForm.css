@@ -79,7 +79,7 @@ body {
     border: 2px solid #1b3358;
 
     transition: background-color 0.2s;
-    margin-right: 15px;
+    margin-right: 0px;
 }
 
 .form-field:hover {
@@ -101,7 +101,7 @@ body {
 
 .amount-field {
     box-sizing: border-box;
-    width: 325px;
+    width: 340px;
     border-radius: 0px;
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
