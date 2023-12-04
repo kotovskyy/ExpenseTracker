@@ -10,4 +10,5 @@ urlpatterns = [
     path('categories/<int:category_id>/edit/', views.editCategory, name='core_editCategory'),
     path('categories/<int:category_id>/delete/', views.deleteCategory, name='core_deleteCategory'),
     path('accounts/<int:account_id>/', views.account, name='core_account'),
+    path('accounts/add/', views.addAccount, name='core_addAccount'),
 ]

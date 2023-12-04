@@ -3,8 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import (Currency,
-                     Transaction)
-from .forms import (AddTransactionForm,
+                     Transaction,
+                     Account)
+from .forms import (AddNewAccountForm,
                     AddTransactionCategoryForm,
                     AddTransactionAccountForm,
                     EditCategoryForm,
@@ -220,4 +221,36 @@ def account(request, account_id):
         'transactions' : transactions,
         'edit_form' : edit_form,
         'n_transactions': transactions.count(),
+    })
+    
+@login_required
+def addAccount(request):
+    user = request.user
+    if request.method == 'POST':
+        form = AddNewAccountForm(user, request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            balance = form.cleaned_data['balance']
+            currency_id = form.cleaned_data['currency']
+            description = form.cleaned_data['description']
+            currency = Currency.objects.get(id=currency_id)
+            
+            account = Account.objects.create(
+                user=user,
+                name=name.capitalize(),
+                balance=balance,
+                currency=currency,
+                description=description
+            )
+            
+            return HttpResponseRedirect(reverse('core_accounts'))
+            
+        else:
+            return render(request, 'core/add_account.html', context={
+                'form': form,
+            })
+        
+    form = AddNewAccountForm(user)
+    return render(request, 'core/add_account.html', context={
+        'form': form,
     })
