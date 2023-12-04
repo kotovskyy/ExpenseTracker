@@ -166,3 +166,27 @@ class EditCategoryForm(forms.Form):
         self.fields['category_type'].initial = category.category_type
 
 
+class AddNewAccountForm(forms.Form):
+    name = forms.CharField(
+        max_length=50,
+        initial=None,
+        widget=forms.TextInput(attrs={'class': 'form-field'})
+    )
+    balance = forms.DecimalField(
+        max_digits=22,
+        decimal_places=2,
+        widget=forms.NumberInput(attrs={'class': 'form-field amount-field amount-currency-shared'})
+    )
+    currency = forms.ChoiceField(
+        choices=[(c.id, c.code) for c in Currency.objects.all()],
+        widget=forms.Select(attrs={'class': 'form-field currency-field'})
+    )
+    description = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-field'})
+    )
+    
+    def __init__(self, user, *args, **kwargs):
+        super(AddNewAccountForm, self).__init__(*args, **kwargs)
+        self.fields['currency'].initial = user.settings.first().main_currency.id
