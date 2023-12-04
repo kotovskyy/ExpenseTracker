@@ -1,0 +1,24 @@
+.add-new-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 150px;
+}
+
+.form-label-field {
+    display: flex;
+}
+
+.form-field-name {
+    width: 220px;
+}
+
+.form-field {
+    flex: 1;
+}
+

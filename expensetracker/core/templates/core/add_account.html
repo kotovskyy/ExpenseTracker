@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/mainapp.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/transactionForm.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/accounts.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/transactions.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/add_new_item.css' %}">
+        <script src="{% static 'core/scripts/transactionForm.js' %}"></script>
+        <title>NOMA</title>
+    </head>
+    <body>
+        <div class="header">
+            <a class="logo-self-reference" href="{% url 'core_categories' %}">
+                <div class="header-left-section">
+                    <div class="header-logo">
+                        <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+                    </div>
+                    <div class="header-text">
+                        NOMA
+                    </div>
+                </div>
+            </a>
+            <div class="header-navigation">
+                <a class="header-navigation-link" href="{% url 'users_userSignOut' %}">Sign Out</a>
+            </div>
+        </div>
+
+        <div class="app-navigation-container">
+            <a href="{% url 'core_accounts' %}">
+                <div class="app-navigation-link">
+                    Accounts
+                </div>
+            </a>
+            <a href="{% url 'core_categories' %}">
+                <div class="app-navigation-link">
+                    Categories
+                </div>
+            </a>
+            <a href="{% url 'core_transactions' %}">
+                <div class="app-navigation-link">
+                    Transactions
+                </div>
+            </a>    
+        </div>
+
+        <div id="content">
+            
+            <div class="add-new-item-container">
+                <form action="" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <h2 id="login-header">Add new accout:</h2>
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Name:
+                        </div>
+                        {% for error in form.name.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                        {{ form.name }}
+                    </div>
+
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Balance:
+                        </div>
+                        <div class="amount-currency-form">
+                            {% for error in form.balance.errors %}
+                                <div class="error-message">{{ error }}</div>
+                            {% endfor %}
+                            {{ form.balance }}
+    
+                            {% for error in form.currency.errors %}
+                                <div class="error-message">{{ error }}</div>
+                            {% endfor %}
+                            {{ form.currency }}
+                        </div>
+                    </div>
+                    
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Description:
+                        </div>
+                        {% for error in form.description.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                        {{ form.description }}    
+                    </div>
+                    
+                    <input class="submit-button" type="submit" value="Add">
+                </form>
+            </div>
+        
+        </div>
+        
+
+    </body>
+</html>
