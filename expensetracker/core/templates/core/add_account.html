@@ -51,9 +51,9 @@
         <div id="content">
             
             <div class="add-new-item-container">
-                <form action="" method="post" autocomplete="off">
+                <form action="{% url 'core_addAccount' %}" method="post" autocomplete="off">
                     {% csrf_token %}
-                    <h2 id="login-header">Add new accout:</h2>
+                    <h2 id="login-header">Add new account:</h2>
                     <div class="form-label-field">
                         <div class="form-field-name">
                             Name:
