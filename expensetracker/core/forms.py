@@ -190,3 +190,21 @@ class AddNewAccountForm(forms.Form):
     def __init__(self, user, *args, **kwargs):
         super(AddNewAccountForm, self).__init__(*args, **kwargs)
         self.fields['currency'].initial = user.settings.first().main_currency.id
+
+class AddNewCategoryForm(forms.Form):
+    INCOME = "I"
+    EXPENSE = "E"
+    CATEGORY_TYPE_CHOICES = [
+        (INCOME, "Income"),
+        (EXPENSE, "Expense")
+    ]
+    name = forms.CharField(
+        max_length=50,
+        initial=None,
+        widget=forms.TextInput(attrs={'class': 'form-field'})
+    )
+    category_type = forms.ChoiceField(
+        choices=CATEGORY_TYPE_CHOICES,
+        initial=EXPENSE,
+        widget=forms.Select(attrs={'class': 'form-field'})
+    )
