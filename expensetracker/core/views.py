@@ -151,7 +151,7 @@ def account(request, account_id):
     expense_categories = user.categories.filter(category_type="E").order_by('id')
     income_categories = user.categories.filter(category_type="I").order_by('id')
     transfer_accounts = user.accounts.all().exclude(id=account_id)
-    t_types = ['E', 'I', 'T']
+    t_types = ['E', 'I']
     options_by_type = {
         'E' : list(expense_categories),
         'I' : list(income_categories),
@@ -189,11 +189,11 @@ def account(request, account_id):
                 account.balance -= amount
             if t_type == "I":
                 account.balance += amount
-            if t_type == "T":
-                account.balance -= amount
-                second_account = user.accounts.get(id=category_id)
-                second_account.balance += amount
-                second_account.save()
+            # if t_type == "T":
+            #     account.balance -= amount
+            #     second_account = user.accounts.get(id=category_id)
+            #     second_account.balance += amount
+            #     second_account.save()
                 
                 # TRANSFER FUNCTINALITY DOESNT WORK AS EXPECTED
                 # NEEDS TO BE COMPLETELY CHANGED

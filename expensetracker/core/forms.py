@@ -9,7 +9,7 @@ class AddTransactionForm(forms.Form):
     TRANSACTION_TYPE_CHOICES = [
         (EXPENSE, "Expense"),
         (INCOME, "Income"),
-        (TRANSFER, "Transfer")
+        # (TRANSFER, "Transfer")
     ]
     transaction_type = forms.ChoiceField(
         choices=TRANSACTION_TYPE_CHOICES,
@@ -164,4 +164,5 @@ class EditCategoryForm(forms.Form):
         super(EditCategoryForm, self).__init__(*args, **kwargs)
         self.fields['name'].initial = category.name
         self.fields['category_type'].initial = category.category_type
+
 
