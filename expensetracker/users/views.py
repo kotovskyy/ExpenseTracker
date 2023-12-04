@@ -49,7 +49,7 @@ def userSignUp(request):
                 )
             messages.success(request,"You have signed up successfully!")
             login(request, user)
-            return HttpResponseRedirect(reverse('core_index'))
+            return HttpResponseRedirect(reverse('core_categories'))
         else:
             return render(request, 'users/signup.html', context={
                 'form': form,
