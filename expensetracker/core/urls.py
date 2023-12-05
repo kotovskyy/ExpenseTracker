@@ -14,4 +14,7 @@ urlpatterns = [
     path('accounts/<int:account_id>/edit/', views.editAccount, name='core_editAccount'),
     path('accounts/<int:account_id>/delete/', views.deleteAccount, name='core_deleteAccount'),
     path('accounts/add/', views.addAccount, name='core_addAccount'),
+    path('transactions/<int:transaction_id>/', views.transaction, name='core_transaction'),
+    path('transactions/<int:transaction_id>/edit/', views.transaction, name='core_editTransaction'),
+    path('transactions/<int:transaction_id>/delete/', views.deleteTransaction, name='core_deleteTransaction'),
 ]
