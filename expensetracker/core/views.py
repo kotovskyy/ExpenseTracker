@@ -123,8 +123,16 @@ def transactions(request):
 def category(request, category_id):
     user = request.user
     category = user.categories.get(id=category_id)
-    transactions = category.transactions.all().order_by('date').reverse()
     t_type = "E"
+    
+    # get period of time (month) to filter data
+    month_number = int(request.GET.get('month', datetime.date.today().month))
+    year = int(request.GET.get('year', datetime.date.today().year))
+    month_name = calendar.month_name[month_number]
+    
+    transactions = category.transactions.filter(date__month=month_number, date__year=year).order_by('date').reverse()
+    date_transactions = transaction_dates(transactions)
+    
     if request.method == 'POST':
         form = AddTransactionCategoryForm(user, t_type, category_id, request.POST)
         if form.is_valid():
@@ -150,6 +158,8 @@ def category(request, category_id):
             account.balance -= amount
             
             account.save()
+            
+            return HttpResponseRedirect(reverse('core_category', args=(category_id,)))
 
         else:
             return render(request, 'core/category.html', context={
@@ -158,6 +168,9 @@ def category(request, category_id):
                 'transactions' : transactions,
                 'edit_form' : EditCategoryForm(user, category),
                 'n_transactions': transactions.count(),
+                "month_name": month_name,
+                "year":year,
+                "date_transactions": date_transactions
             })
             
     form = AddTransactionCategoryForm(user, t_type, category_id)
@@ -168,6 +181,9 @@ def category(request, category_id):
         'transactions' : transactions,
         'edit_form' : edit_form,
         'n_transactions': transactions.count(),
+        "month_name": month_name,
+        "year":year,
+        "date_transactions": date_transactions
     })
     
 @login_required
