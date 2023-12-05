@@ -34,7 +34,8 @@ def userLogin(request):
 
 
 def userSignUp(request):
-    BASE_CATEGORIES = ["Groceries", "Transport", "Home", "Clothes", "Health"]
+    BASE_EXPENSE_CATEGORIES = ["Groceries", "Transport", "Home", "Clothes", "Health"]
+    BASE_INCOME_CATEGORIES = ["Salary",]
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -42,10 +43,16 @@ def userSignUp(request):
             settings = Settings.objects.create(
                 user=user
             )
-            for c in BASE_CATEGORIES:
+            for c in BASE_EXPENSE_CATEGORIES:
                 category = Category.objects.create(
                     user=user,
                     name=c
+                )
+            for c in BASE_INCOME_CATEGORIES:
+                category = Category.objects.create(
+                    user=user,
+                    name = c,
+                    category_type="I"
                 )
             messages.success(request,"You have signed up successfully!")
             login(request, user)
