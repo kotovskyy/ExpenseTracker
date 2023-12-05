@@ -163,6 +163,7 @@ def editCategory(request, category_id):
         form = EditCategoryForm(user, category, request.POST)
         if form.is_valid():
             new_name = form.cleaned_data['name']
+            new_name = new_name[0].upper() + new_name[1:]
             new_type = form.cleaned_data['category_type']
             
             category.name = new_name
@@ -205,11 +206,12 @@ def addCategory(request):
         form = AddNewCategoryForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
+            name = name[0].upper() + name[1:]
             category_type = form.cleaned_data['category_type']
             
             category = Category.objects.create(
                 user=user,
-                name=name.capitalize(),
+                name=name,
                 category_type=category_type
             )
             
@@ -304,6 +306,7 @@ def addAccount(request):
         form = AddNewAccountForm(user, request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
+            name = name[0].upper() + name[1:]
             balance = form.cleaned_data['balance']
             currency_id = form.cleaned_data['currency']
             description = form.cleaned_data['description']
@@ -311,7 +314,7 @@ def addAccount(request):
             
             account = Account.objects.create(
                 user=user,
-                name=name.capitalize(),
+                name=name,
                 balance=balance,
                 currency=currency,
                 description=description
