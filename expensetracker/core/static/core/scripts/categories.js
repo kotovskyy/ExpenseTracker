@@ -8,6 +8,19 @@ function editCategory(category_id){
     form.submit();
 }
 
+function editAccount(account_id) {
+    let form = document.getElementById("editAccountForm_"+account_id);
+    form.submit();
+}
+
+function deleteAccount(account_id, n_transactions) {
+    let confirmDelete = confirm("Are you sure you want to delete this account?\nAll transactions ("+n_transactions+") associated with this account will be removed.");
+    if (confirmDelete) {
+        let form = document.getElementById("deleteAccountForm_"+account_id);
+        form.submit();
+    }
+}
+
 function deleteCategory(category_id, n_transactions){
     let confirmDelete = confirm("Are you sure you want to delete this category?\nAll transactions ("+n_transactions+") associated with this category will be removed.");
     if (confirmDelete) {

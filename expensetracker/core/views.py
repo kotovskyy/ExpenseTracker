@@ -218,15 +218,7 @@ def account(request, account_id):
                 account.balance -= amount
             if t_type == "I":
                 account.balance += amount
-            # if t_type == "T":
-            #     account.balance -= amount
-            #     second_account = user.accounts.get(id=category_id)
-            #     second_account.balance += amount
-            #     second_account.save()
-                
-                # TRANSFER FUNCTINALITY DOESNT WORK AS EXPECTED
-                # NEEDS TO BE COMPLETELY CHANGED
-            
+        
             account.save()
             
         else:
@@ -241,6 +233,7 @@ def account(request, account_id):
             })
             
     form = AddTransactionAccountForm(user, t_type, account_id)
+    edit_form = EditAccountForm(user, account)
     return render(request, 'core/account.html', context={
         't_types': t_types,
         'opt_by_type': options_by_type,
@@ -282,3 +275,32 @@ def addAccount(request):
     return render(request, 'core/add_account.html', context={
         'form': form,
     })
+    
+@login_required
+def editAccount(request, account_id):
+    user = request.user
+    account = user.accounts.get(id=account_id)
+    if request.method == 'POST':
+        pass
+        # form = EditAccountForm(user, account, request.POST)
+        # if form.is_valid():
+        #     new_name = form.cleaned_data['name']
+        #     new_type = form.cleaned_data['category_type']
+            
+        #     category.name = new_name
+        #     category.category_type = new_type
+            
+        #     category.save()
+
+        # else:
+            # return HttpResponseRedirect(reverse('core_account', args=(account_id,)))
+    return HttpResponseRedirect(reverse('core_account', args=(account_id,)))
+
+@login_required
+def deleteAccount(request, account_id):
+    user = request.user
+    account = user.accounts.get(id=account_id)
+    if request.method == 'POST':
+        pass
+    return HttpResponseRedirect(reverse('core_account', args=(account_id,)))
+    

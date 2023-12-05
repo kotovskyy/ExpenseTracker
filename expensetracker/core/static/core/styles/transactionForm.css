@@ -32,6 +32,7 @@ body {
 
 .add-transaction-container {
     width: 100%;
+    padding-bottom: 200px;
     overflow-y: auto;
 }
 

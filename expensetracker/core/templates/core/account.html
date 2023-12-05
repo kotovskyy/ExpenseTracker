@@ -135,6 +135,56 @@
                     </div>
                     <div class="edit-item-form-container">
 
+                        <form id="editAccountForm_{{ account.id }}" action="{% url 'core_editAccount' account.id %}" method="post" autocomplete="off">
+                            <h2>Account settings:</h2>
+                            {% csrf_token %}
+
+                            <div class="form-label-field">
+                                <div class="form-field-name">
+                                    Name:
+                                </div>
+                                {% for error in edit_form.name.errors %}
+                                    <div class="error-message">{{ error }}</div>
+                                {% endfor %}
+                                {{ edit_form.name }}
+                            </div>
+
+                            <div class="form-label-field">
+                                <div class="form-field-name">
+                                    Balance:
+                                </div>
+                                <div class="amount-currency-form">
+                                    {% for error in edit_form.balance.errors %}
+                                        <div class="error-message">{{ error }}</div>
+                                    {% endfor %}
+                                    {{ edit_form.balance }}
+            
+                                    {% for error in edit_form.currency.errors %}
+                                        <div class="error-message">{{ error }}</div>
+                                    {% endfor %}
+                                    {{ edit_form.currency }}
+                                </div>
+                            </div>
+
+                            <div class="form-label-field">
+                                <div class="form-field-name">
+                                    Description:
+                                </div>
+                                {% for error in edit_form.description.errors %}
+                                    <div class="error-message">{{ error }}</div>
+                                {% endfor %}
+                                {{ edit_form.description }}    
+                            </div>
+
+                        </form>
+                        <form id="deleteAccountForm_{{ account.id }}" action="{% url 'core_deleteAccount' account.id %}" method="post">
+                            {% csrf_token %}
+                        </form>
+                        <div class="form-buttons">
+                            <input type="button" class="form-button" value="Edit" onclick="editAccount('{{ account.id }}')">
+                            <input type="button" class="form-button" value="Delete account" onclick="deleteAccount('{{ account.id }}', '{{ n_transactions }}')">
+                        </div>
+
                     </div>
                 </div>
             </div>

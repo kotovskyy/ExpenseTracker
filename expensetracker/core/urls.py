@@ -11,5 +11,7 @@ urlpatterns = [
     path('categories/<int:category_id>/delete/', views.deleteCategory, name='core_deleteCategory'),
     path('categories/add/', views.addCategory, name='core_addCategory'),
     path('accounts/<int:account_id>/', views.account, name='core_account'),
+    path('accounts/<int:account_id>/edit/', views.editAccount, name='core_editAccount'),
+    path('accounts/<int:account_id>/delete/', views.deleteAccount, name='core_deleteAccount'),
     path('accounts/add/', views.addAccount, name='core_addAccount'),
 ]

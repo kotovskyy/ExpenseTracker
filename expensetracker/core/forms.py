@@ -130,7 +130,8 @@ class EditAccountForm(forms.Form):
     )
     description = forms.CharField(
         max_length=100,
-        required=False
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-field'})
     )
     
     def __init__(self, user, account, *args, **kwargs):
