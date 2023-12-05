@@ -53,28 +53,6 @@ class AddTransactionForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-field'})
     )
     
-    # def __init__(self, user, t_type: str, category_id=None, account_id=None, *args, **kwargs):
-    #     super(AddTransactionForm, self).__init__(*args, **kwargs)
-    #     self.fields['transaction_type'].initial = t_type
-        
-    #     if category_id is not None:
-    #         self.fields['category'].initial = category_id
-        
-    #     self.fields['account'].choices = \
-    #             [(acc.id, acc.name) for acc in user.accounts.all().order_by('id')]
-    #     if account_id is not None:
-    #         self.fields['account'].initial = account_id
-    #         # self.fields['transaction_type'].initial = None
-    #     self.fields['currency'].initial = user.settings.first().main_currency
-    #     if t_type == "I":
-    #         self.fields['category'].choices = \
-    #             [(c.id, c.name) for c in user.categories.filter(category_type="I").order_by('id')]
-    #     elif t_type == "T":
-    #         self.fields['category'].choices = \
-    #             [(c.id, c.name) for c in user.accounts.all().order_by('id')]
-    #     else:
-    #         self.fields['category'].choices = \
-    #             [(c.id, c.name) for c in user.categories.filter(category_type="E").order_by('id')]
 
 class AddTransactionCategoryForm(AddTransactionForm):
     def __init__(self, user, t_type, category_id=None, *args, **kwargs):
@@ -87,9 +65,6 @@ class AddTransactionCategoryForm(AddTransactionForm):
         if t_type == "I":
             self.fields['category'].choices = \
                 [(c.id, c.name) for c in user.categories.filter(category_type="I").order_by('id')]
-        elif t_type == "T":
-            self.fields['category'].choices = \
-                [(c.id, c.name) for c in user.accounts.all().order_by('id')]
         else:
             self.fields['category'].choices = \
                 [(c.id, c.name) for c in user.categories.filter(category_type="E").order_by('id')]
@@ -100,17 +75,7 @@ class AddTransactionAccountForm(AddTransactionForm):
         self.fields['account'].initial = account_id
 
         self.fields['category'].choices = \
-                [(c.id, c.name) for c in user.categories.filter(category_type="I").order_by('id')] + [(c.id, c.name) for c in user.accounts.all().order_by('id')]
-
-        # if t_type == "I":
-        #     self.fields['category'].choices = \
-        #         [(c.id, c.name) for c in user.categories.filter(category_type="I").order_by('id')]
-        # elif t_type == "T":
-        #     self.fields['category'].choices = \
-        #         [(c.id, c.name) for c in user.accounts.all().order_by('id')]
-        # else:
-        #     self.fields['category'].choices = \
-        #         [(c.id, c.name) for c in user.categories.filter(category_type="E").order_by('id')]
+                [(c.id, c.name) for c in user.categories.all().order_by('id')]
         
 
 class EditAccountForm(forms.Form):
@@ -137,7 +102,7 @@ class EditAccountForm(forms.Form):
     def __init__(self, user, account, *args, **kwargs):
         super(EditAccountForm, self).__init__(*args, **kwargs)
         self.fields['name'].initial = account.name
-        self.fields['currency'].initial = account.currency
+        self.fields['currency'].initial = account.currency.id
         self.fields['balance'].initial = account.balance
         self.fields['description'].initial = account.description
 
@@ -165,6 +130,28 @@ class EditCategoryForm(forms.Form):
         super(EditCategoryForm, self).__init__(*args, **kwargs)
         self.fields['name'].initial = category.name
         self.fields['category_type'].initial = category.category_type
+
+
+class EditTransactionForm(AddTransactionForm):
+    def __init__(self, user, transaction, *args, **kwargs):
+        super(EditTransactionForm, self).__init__(*args, **kwargs)
+        self.fields['account'].choices = \
+                [(acc.id, acc.name) for acc in user.accounts.all().order_by('id')]
+        
+        if transaction.transaction_type == "E":
+            self.fields['category'].choices = \
+                [(c.id, c.name) for c in user.categories.filter(category_type="E").order_by('id')]
+        else:
+            self.fields['category'].choices = \
+                [(c.id, c.name) for c in user.categories.filter(category_type="I").order_by('id')]
+            
+        self.fields['transaction_type'].initial = transaction.transaction_type
+        self.fields['amount'].initial = transaction.amount
+        self.fields['currency'].initial = transaction.currency.id
+        self.fields['category'].initial = transaction.category.id
+        self.fields['account'].initial = transaction.account.id
+        self.fields['description'].initial = transaction.description
+        self.fields['date'].initial = transaction.date
 
 
 class AddNewAccountForm(forms.Form):
