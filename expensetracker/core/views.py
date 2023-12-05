@@ -372,3 +372,86 @@ def deleteAccount(request, account_id):
         
     return HttpResponseRedirect(reverse('core_accounts'))
     
+@login_required
+def transaction(request, transaction_id):
+    user = request.user
+    transaction = user.transactions.get(id=transaction_id)
+    if request.method == 'POST':
+        form = EditTransactionForm(user, transaction, request.POST)
+        if form.is_valid():
+            t_type = transaction.transaction_type
+            account = transaction.account
+            amount = transaction.amount
+            currency = transaction.currency
+            
+            new_account = user.accounts.get(id=form.cleaned_data['account'])
+            new_category = user.categories.get(id=form.cleaned_data['category'])
+            new_amount = form.cleaned_data['amount']
+            new_currency = Currency.objects.get(id=form.cleaned_data['currency'])
+            new_date = form.cleaned_data['date']
+            new_description = form.cleaned_data['description']
+            
+            conv_amount = convert_amount(amount, currency, account.currency)
+            new_conv_amount = convert_amount(new_amount, new_currency, new_account.currency)
+            if account != new_account:
+                if t_type == "E":
+                    account.balance += conv_amount
+                    new_account.balance -= new_conv_amount
+                elif t_type == "I":
+                    account.balance -= conv_amount
+                    new_account.balance += new_conv_amount
+                account.save()
+                new_account.save()
+            else:
+                if t_type == "E":
+                    account.balance += conv_amount
+                    account.balance -= new_conv_amount
+                elif t_type == "I":
+                    account.balance -= conv_amount
+                    account.balance += new_conv_amount
+                account.save()
+                
+            # update transaction's data
+            transaction.category = new_category
+            transaction.description = new_description
+            transaction.date = new_date
+            transaction.amount = new_amount
+            transaction.currency = new_currency
+            transaction.account = new_account
+            
+            transaction.save()
+            
+            return HttpResponseRedirect(reverse('core_categories'))
+        
+        else:
+            return render(request, 'core/transaction.html', context={
+                'form': form,
+                'transaction': transaction,
+            })
+            
+    form = EditTransactionForm(user, transaction)
+    return render(request, 'core/transaction.html', context={
+        'form': form,
+        'transaction': transaction,
+    })
+
+@login_required
+def deleteTransaction(request, transaction_id):
+    user = request.user
+    transaction = user.transactions.get(id=transaction_id)
+    if request.method == 'POST':
+        account = transaction.account
+        t_type = transaction.transaction_type
+        currency = transaction.currency
+        conv_amount = convert_amount(transaction.amount, currency, account.currency)
+        if t_type == "E":
+            conv_amount = convert_amount(transaction.amount, currency, account.currency)
+            account.balance += conv_amount
+        elif t_type == "I":
+            conv_amount = convert_amount(transaction.amount, currency, account.currency)
+            account.balance -= conv_amount
+                
+        account.save()
+        transaction.delete()
+        
+    return HttpResponseRedirect(reverse('core_categories'))
