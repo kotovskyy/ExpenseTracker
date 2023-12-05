@@ -17,8 +17,11 @@ from decimal import Decimal
 import datetime
 import calendar
 
-def convert_amount(amount, currency, main_currency):
-    rate = currency.exchange_rates[main_currency.code]
+def convert_amount(amount, conv_from, conv_to):
+    """
+        Convert `amount` from `conv_from` currency to `conv_to` currency.
+    """
+    rate = conv_from.exchange_rates[conv_to.code]
     rate = Decimal(str(rate))
     return round(amount * rate, 2)
 
