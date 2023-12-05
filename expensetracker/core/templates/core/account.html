@@ -196,7 +196,7 @@
 
                 <div class="choose-period-container">
                     <div class="choose-prev-period-container">
-                        <button class="choose-next-period-button" type="button" onclick="changePeriodAccount('prev', '{{ account.id }}')">
+                        <button class="choose-next-period-button" type="button" onclick="changePeriod('prev', 'accounts/{{ account.id }}')">
                             <img class="period-button-icon" src="{% static 'core/svg/prev-period.svg' %}" alt="previous period">
                         </button>
                     </div>
@@ -204,7 +204,7 @@
                         {{ month_name }} {{ year }}
                     </div>
                     <div class="choose-next-period-container">
-                        <button class="choose-next-period-button" type="button" onclick="changePeriodAccount('next', '{{ account.id }}')">
+                        <button class="choose-next-period-button" type="button" onclick="changePeriod('next', 'accounts/{{ account.id }}')">
                             <img class="period-button-icon" src="{% static 'core/svg/next-period.svg' %}" alt="next period">
                         </button>
                     </div>

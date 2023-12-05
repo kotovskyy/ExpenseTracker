@@ -114,9 +114,21 @@ def accounts(request):
 @login_required
 def transactions(request):
     user = request.user
-    transactions = user.transactions.all().order_by('date').reverse()
+    
+    # get period of time (month) to filter data
+    month_number = int(request.GET.get('month', datetime.date.today().month))
+    year = int(request.GET.get('year', datetime.date.today().year))
+    month_name = calendar.month_name[month_number]
+    
+    
+    transactions = user.transactions.filter(date__month=month_number, date__year=year).order_by('date').reverse()
+    date_transactions = transaction_dates(transactions)
+    
     return render(request, 'core/transactions.html', context={
         'transactions': transactions,
+        "month_name": month_name,
+        "year":year,
+        "date_transactions": date_transactions
     })
 
 @login_required

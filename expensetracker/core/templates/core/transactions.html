@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="{% static 'core/styles/mainapp.css' %}">
         <link rel="stylesheet" href="{% static 'core/styles/accounts.css' %}">
         <link rel="stylesheet" href="{% static 'core/styles/transactions.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'core/styles/transactionForm.css' %}"> -->
+        <script src="{% static 'core/scripts/categories.js' %}"></script>
         <title>NOMA</title>
     </head>
     <body>
@@ -53,41 +55,61 @@
                         Transactions:
                     </div>
                 </div>
-                {% for transaction in transactions %}
-                    <a href="{% url 'core_transaction' transaction.id %}">
-                        <div class="item-container">
-                            <div class="item-data-container">
-                                <div class="item-icon-container">
-                                    <img class="item-icon" src="{% static 'core/svg/account.svg' %}" alt="transaction icon">
-                                </div>
-                                <div class="item-name-description">
-                                    <div class="item-name">
-                                        {{ transaction.category.name }}
-                                    </div>
-                                    <div class="item-account">
-                                        {{ transaction.account.name }}
-                                    </div>
-                                    <div class="item-description">
-                                        {{ transaction.description }}
-                                    </div>
-                                </div>
-                            </div>
-                            {% if transaction.transaction_type == "E" %}
-                            <div class="item-balance expense-amount">
-                                - {{ transaction.amount }} {{ transaction.currency.code }}
-                            </div>
-                            {% elif transaction.transaction_type == "I"%}
-                            <div class="item-balance income-amount">
-                                + {{ transaction.amount }} {{ transaction.currency.code }}
-                            </div>
-                            {% else %}
-                            <div class="item-balance transfer-amount">
-                                - {{ transaction.amount }} {{ transaction.currency.code }}
-                            </div>
-                            {% endif %}
 
-                        </div>
-                    </a>
+                <div class="choose-period-container">
+                    <div class="choose-prev-period-container">
+                        <button class="choose-next-period-button" type="button" onclick="changePeriod('prev', 'transactions')">
+                            <img class="period-button-icon" src="{% static 'core/svg/prev-period.svg' %}" alt="previous period">
+                        </button>
+                    </div>
+                    <div class="period-text">
+                        {{ month_name }} {{ year }}
+                    </div>
+                    <div class="choose-next-period-container">
+                        <button class="choose-next-period-button" type="button" onclick="changePeriod('next', 'transactions')">
+                            <img class="period-button-icon" src="{% static 'core/svg/next-period.svg' %}" alt="next period">
+                        </button>
+                    </div>
+                </div>
+
+                {% for d, t_list in date_transactions.items %}
+                <h3 class="transaction-list-date">{{ d.0 }}, {{ d.1 }} {{ d.2 }}, {{ d.3 }}</h3>
+                    {% for transaction in t_list %}
+                        <a href="{% url 'core_transaction' transaction.id %}">
+                            <div class="item-container">
+                                <div class="item-data-container">
+                                    <div class="item-icon-container">
+                                        <img class="item-icon" src="{% static 'core/svg/account.svg' %}" alt="transaction icon">
+                                    </div>
+                                    <div class="item-name-description">
+                                        <div class="item-name">
+                                            {{ transaction.category.name }}
+                                        </div>
+                                        <div class="item-account">
+                                            {{ transaction.account.name }}
+                                        </div>
+                                        <div class="item-description">
+                                            {{ transaction.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if transaction.transaction_type == "E" %}
+                                <div class="item-balance expense-amount">
+                                    - {{ transaction.amount }} {{ transaction.currency.code }}
+                                </div>
+                                {% elif transaction.transaction_type == "I"%}
+                                <div class="item-balance income-amount">
+                                    + {{ transaction.amount }} {{ transaction.currency.code }}
+                                </div>
+                                {% else %}
+                                <div class="item-balance transfer-amount">
+                                    - {{ transaction.amount }} {{ transaction.currency.code }}
+                                </div>
+                                {% endif %}
+
+                            </div>
+                        </a>
+                    {% endfor %}
                 {% endfor %}
             </div>
             
