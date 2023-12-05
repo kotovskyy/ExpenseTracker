@@ -82,8 +82,18 @@ def categories(request):
 def accounts(request):
     user = request.user
     accounts = user.accounts.all().order_by('id')
+    
+    currency = user.settings.first().main_currency
+    total_balance = 0
+    
+    for account in accounts:
+        balance = convert_amount(account.balance, account.currency, currency)
+        total_balance += balance
+    
     return render(request, 'core/accounts.html', context={
         'accounts': accounts,
+        'main_currency' : currency,
+        'total_balance' : total_balance,
     })
     
 @login_required
