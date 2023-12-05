@@ -26,6 +26,9 @@ def convert_amount(amount, conv_from, conv_to):
     return round(amount * rate, 2)
 
 def index(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('core_categories'))
+        
     return render(request, 'core/index.html', context={
         "logged_in" : request.user.is_authenticated,
     })
