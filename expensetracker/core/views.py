@@ -36,9 +36,46 @@ def index(request):
 @login_required
 def categories(request):
     user = request.user
+    main_currency = user.settings.first().main_currency
     categories = user.categories.filter(category_type='E').order_by('id')
+    
+        # get period of time (month) to filter data
+    month_number = int(request.GET.get('month', datetime.date.today().month))
+    year = int(request.GET.get('year', datetime.date.today().year))
+    month_name = calendar.month_name[month_number]
+    
+    income_transactions = Transaction.objects.filter(
+        user=user,
+        date__month=month_number,
+        date__year=year,
+        transaction_type="I"
+    )
+    
+    total_income = sum([convert_amount(t.amount, t.currency, main_currency) for t in income_transactions])
+    
+    categories_total = []
+    
+    for c in categories:
+        total = 0
+        transactions = c.transactions.filter(
+            date__month=month_number,
+            date__year=year
+        )
+        for t in transactions:
+            total += convert_amount(t.amount, t.currency, main_currency)
+        categories_total.append(total)
+    
+    total_expense = sum(categories_total)
+    categories_expenses = list(zip(categories, categories_total)) 
+    
     return render(request, 'core/categories.html', context={
         'categories': categories,
+        "main_currency": main_currency,
+        "total_expense": total_expense,
+        "total_income": total_income,
+        "month_name": month_name,
+        "year":year,
+        "categories_expenses" : categories_expenses,
     })
     
 @login_required
