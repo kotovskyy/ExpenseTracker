@@ -121,7 +121,7 @@ def transactions(request):
     month_name = calendar.month_name[month_number]
     
     
-    transactions = user.transactions.filter(date__month=month_number, date__year=year).order_by('date').reverse()
+    transactions = user.transactions.filter(date__month=month_number, date__year=year).order_by('id').reverse()
     date_transactions = transaction_dates(transactions)
     
     return render(request, 'core/transactions.html', context={
@@ -142,7 +142,7 @@ def category(request, category_id):
     year = int(request.GET.get('year', datetime.date.today().year))
     month_name = calendar.month_name[month_number]
     
-    transactions = category.transactions.filter(date__month=month_number, date__year=year).order_by('date').reverse()
+    transactions = category.transactions.filter(date__month=month_number, date__year=year).order_by('id').reverse()
     date_transactions = transaction_dates(transactions)
     
     if request.method == 'POST':
@@ -293,7 +293,7 @@ def account(request, account_id):
     year = int(request.GET.get('year', datetime.date.today().year))
     month_name = calendar.month_name[month_number]
     
-    transactions = account.transactions.filter(date__month=month_number, date__year=year).order_by('date').reverse()
+    transactions = account.transactions.filter(date__month=month_number, date__year=year).order_by('id').reverse()
     date_transactions = transaction_dates(transactions)
 
     if request.method == 'POST':
@@ -404,7 +404,7 @@ def editAccount(request, account_id):
             new_description = form.cleaned_data['description']
             new_currency = Currency.objects.get(id=new_currency_id)
 
-            account.name = new_name,
+            account.name = new_name
             account.balance = new_balance
             account.currency = new_currency
             account.description = new_description
