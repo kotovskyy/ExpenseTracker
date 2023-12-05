@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'core/styles/index.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/mainapp.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/transactionForm.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/accounts.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/transactions.css' %}">
+        <link rel="stylesheet" href="{% static 'core/styles/add_new_item.css' %}">
+        <script src="{% static 'core/scripts/categories.js' %}"></script>
+        <script src="{% static 'core/scripts/transactionForm.js' %}"></script>
+        <title>NOMA</title>
+    </head>
+    <body>
+        <div class="header">
+            <a class="logo-self-reference" href="{% url 'core_categories' %}">
+                <div class="header-left-section">
+                    <div class="header-logo">
+                        <img src="{% static 'core/svg/main-logo.svg' %}" alt="logo">
+                    </div>
+                    <div class="header-text">
+                        NOMA
+                    </div>
+                </div>
+            </a>
+            <div class="header-navigation">
+                <a class="header-navigation-link" href="{% url 'users_userSignOut' %}">Sign Out</a>
+            </div>
+        </div>
+
+        <div class="app-navigation-container">
+            <a href="{% url 'core_accounts' %}">
+                <div class="app-navigation-link">
+                    Accounts
+                </div>
+            </a>
+            <a href="{% url 'core_categories' %}">
+                <div class="app-navigation-link">
+                    Categories
+                </div>
+            </a>
+            <a href="{% url 'core_transactions' %}">
+                <div class="app-navigation-link">
+                    Transactions
+                </div>
+            </a>    
+        </div>
+
+        <div id="content">
+            
+            <div class="add-new-item-container">
+                <form action="{% url 'core_editTransaction' transaction.id %}" id="editTransactionForm_{{ transaction.id }}" method="post" autocomplete="off">
+                    <h2>Transaction settigns:</h2>
+                    {% csrf_token %}
+
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Account:
+                        </div>
+                        {% for error in form.account.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                        {{ form.account }}
+                    </div>
+
+                    <div class="form-label-field">
+                        <div class="form-field-name" id="where-to-label">
+                            Category:
+                        </div>
+                        {% for error in form.category.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                        {{ form.category }}
+                    </div>
+
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Amount:
+                        </div>
+                        <div class="amount-currency-form">
+                            {% for error in form.amount.errors %}
+                                <div class="error-message">{{ error }}</div>
+                            {% endfor %}
+                            {{ form.amount }}
+    
+                            {% for error in form.currency.errors %}
+                                <div class="error-message">{{ error }}</div>
+                            {% endfor %}
+                            {{ form.currency }}
+                        </div>
+                    </div>
+
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Date:
+                        </div>
+                        {% for error in form.date.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                        {{ form.date }}
+                    </div>
+                    
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Description:
+                        </div>
+                        {% for error in form.description.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                        {{ form.description }}    
+                    </div>
+                </form>
+                <form id="deleteTransactionForm_{{ transaction.id }}" action="{% url 'core_deleteTransaction' transaction.id %}" method="post">
+                    {% csrf_token %}
+                </form>
+                <div class="form-buttons">
+                    <input type="button" class="form-button" value="Edit" onclick="editTransaction('{{ transaction.id }}')">
+                    <input type="button" class="form-button" value="Delete" onclick="deleteTransaction('{{ transaction.id }}')">
+                </div>
+            </div>
+        
+        </div>
+        
+
+    </body>
+</html>
