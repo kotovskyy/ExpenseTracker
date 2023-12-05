@@ -11,7 +11,8 @@ from .forms import (AddNewAccountForm,
                     AddTransactionCategoryForm,
                     AddTransactionAccountForm,
                     EditCategoryForm,
-                    EditAccountForm)
+                    EditAccountForm,
+                    EditTransactionForm)
 
 from decimal import Decimal
 import datetime
@@ -337,19 +338,25 @@ def editAccount(request, account_id):
     user = request.user
     account = user.accounts.get(id=account_id)
     if request.method == 'POST':
-        pass
-        # form = EditAccountForm(user, account, request.POST)
-        # if form.is_valid():
-        #     new_name = form.cleaned_data['name']
-        #     new_type = form.cleaned_data['category_type']
-            
-        #     category.name = new_name
-        #     category.category_type = new_type
-            
-        #     category.save()
+        form = EditAccountForm(user, account, request.POST)
+        if form.is_valid():
+            new_name = form.cleaned_data['name']
+            new_name = new_name[0].upper() + new_name[1:]
+            new_balance = form.cleaned_data['balance']
+            new_currency_id = form.cleaned_data['currency']
+            new_description = form.cleaned_data['description']
+            new_currency = Currency.objects.get(id=new_currency_id)
 
-        # else:
-            # return HttpResponseRedirect(reverse('core_account', args=(account_id,)))
+            account.name = new_name,
+            account.balance = new_balance
+            account.currency = new_currency
+            account.description = new_description
+            
+            account.save()
+            
+        else:
+            return HttpResponseRedirect(reverse('core_account', args=(account_id,)))
+        
     return HttpResponseRedirect(reverse('core_account', args=(account_id,)))
 
 @login_required
