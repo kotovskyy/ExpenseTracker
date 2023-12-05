@@ -182,6 +182,11 @@ body {
     overflow: auto;
 }
 
+.items-container a {
+    text-decoration: none;
+    color: inherit;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
