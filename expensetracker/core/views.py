@@ -26,6 +26,20 @@ def convert_amount(amount, conv_from, conv_to):
     rate = Decimal(str(rate))
     return round(amount * rate, 2)
 
+def transaction_dates(transactions):
+    dates = [
+        (d[0].strftime("%A"),
+        d[0].day,
+        d[0].strftime("%B"),
+        d[0].year,
+        d[0]) for d in transactions.distinct().values_list("date")]
+    date_transactions = {date:[] for date in dates}
+    for date in dates:
+        for t in transactions:
+            if t.date == date[4]:
+                date_transactions[date].append(t)
+    return date_transactions
+
 def index(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('core_categories'))
@@ -232,7 +246,6 @@ def addCategory(request):
 def account(request, account_id):
     user = request.user
     account = user.accounts.get(id=account_id)
-    transactions = account.transactions.all().order_by('date').reverse()
     expense_categories = user.categories.filter(category_type="E").order_by('id')
     income_categories = user.categories.filter(category_type="I").order_by('id')
     transfer_accounts = user.accounts.all().exclude(id=account_id)
@@ -243,8 +256,17 @@ def account(request, account_id):
         'T' : list(transfer_accounts)
     }
 
+
     t_type = "E"
     edit_form = EditAccountForm(user, account)
+
+    # get period of time (month) to filter data
+    month_number = int(request.GET.get('month', datetime.date.today().month))
+    year = int(request.GET.get('year', datetime.date.today().year))
+    month_name = calendar.month_name[month_number]
+    
+    transactions = account.transactions.filter(date__month=month_number, date__year=year).order_by('date').reverse()
+    date_transactions = transaction_dates(transactions)
 
     if request.method == 'POST':
         form = AddTransactionAccountForm(user, t_type, account_id, request.POST)
@@ -277,6 +299,7 @@ def account(request, account_id):
         
             account.save()
             
+            return HttpResponseRedirect(reverse('core_account', args=(account_id,)))
         else:
             return render(request, 'core/account.html', context={
                 't_types': t_types,
@@ -285,7 +308,10 @@ def account(request, account_id):
                 'account' : account,
                 'transactions' : transactions,
                 'edit_form' : edit_form,
+                "month_name": month_name,
+                "year":year,
                 'n_transactions': transactions.count(),
+                "date_transactions": date_transactions
             })
             
     form = AddTransactionAccountForm(user, t_type, account_id)
@@ -298,6 +324,9 @@ def account(request, account_id):
         'transactions' : transactions,
         'edit_form' : edit_form,
         'n_transactions': transactions.count(),
+        "month_name": month_name,
+        "year":year,
+        "date_transactions": date_transactions
     })
     
 @login_required

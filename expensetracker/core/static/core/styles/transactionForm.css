@@ -32,7 +32,7 @@ body {
 
 .add-transaction-container {
     width: 100%;
-    padding-bottom: 200px;
+    padding-bottom: 170px;
     overflow-y: auto;
 }
 
@@ -233,4 +233,9 @@ button:focus {
 
 .form-button:hover {
     background-color: #f1916d;
+}
+
+.transaction-list-date {
+    font-size: 26px;
+    margin-left: 40px;
 }
