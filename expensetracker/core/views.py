@@ -363,7 +363,12 @@ def editAccount(request, account_id):
 def deleteAccount(request, account_id):
     user = request.user
     account = user.accounts.get(id=account_id)
+    transactions = account.transactions.all()
     if request.method == 'POST':
-        pass
-    return HttpResponseRedirect(reverse('core_account', args=(account_id,)))
+        for t in transactions:            
+            t.delete()
+        
+        account.delete()
+        
+    return HttpResponseRedirect(reverse('core_accounts'))
     
