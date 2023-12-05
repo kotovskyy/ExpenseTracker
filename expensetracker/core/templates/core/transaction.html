@@ -53,7 +53,7 @@
             
             <div class="add-new-item-container">
                 <form action="{% url 'core_editTransaction' transaction.id %}" id="editTransactionForm_{{ transaction.id }}" method="post" autocomplete="off">
-                    <h2>Transaction settigns:</h2>
+                    <h2>Transaction settings:</h2>
                     {% csrf_token %}
 
                     <div class="form-label-field">
