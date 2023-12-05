@@ -46,18 +46,34 @@
 
         <div id="content">
     
+            <div class="choose-period-container">
+                <div class="choose-prev-period-container">
+                    <button class="choose-next-period-button" type="button" onclick="changePeriod('prev')">
+                        <img class="period-button-icon" src="{% static 'core/svg/prev-period.svg' %}" alt="previous period">
+                    </button>
+                </div>
+                <div class="period-text">
+                    {{ month_name }} {{ year }}
+                </div>
+                <div class="choose-next-period-container">
+                    <button class="choose-next-period-button" type="button" onclick="changePeriod('next')">
+                        <img class="period-button-icon" src="{% static 'core/svg/next-period.svg' %}" alt="next period">
+                    </button>
+                </div>
+            </div>
+
             <div class="main-categories-container">
-                {% for category in categories %}
+                {% for category, total in categories_expenses %}
                 <button class="category-container-button" onclick="openCategoryPage('{{ category.id }}')">
                     <div class="category-container">
                         <div class="category-name">
-                            {{ category.name}}
+                            {{ category.name }}
                         </div>
                         <div class="category-icon-container">
                             <img class="category-icon" src="{% static 'core/svg/groceries.svg' %}" alt="category image">
                         </div>
                         <div class="category-total">
-                            1234.56 PLN
+                            {{ total }} {{ main_currency.code }}
                         </div> 
                     </div>
                 </button>
@@ -80,10 +96,10 @@
                             Expenses
                         </div>
                         <div class="total-data total-expense main-info-label">
-                            1234.56 PLN
+                            {{ total_expense }} {{ main_currency.code }}
                         </div>
                         <div class="total-data total-income">
-                            6543.21 PLN
+                            {{ total_income }} {{ main_currency.code }}
                         </div>
                     </div>
                 </div>

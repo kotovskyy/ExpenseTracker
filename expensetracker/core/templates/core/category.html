@@ -157,38 +157,40 @@
 
                 <div class="items-container">
                     {% for transaction in transactions %}
-                        <div class="item-container">
-                            <div class="item-data-container">
-                                <div class="item-icon-container">
-                                    <img class="item-icon" src="{% static 'core/svg/account.svg' %}" alt="transaction icon">
+                        <a href="{% url 'core_transaction' transaction.id %}">
+                            <div class="item-container">
+                                <div class="item-data-container">
+                                    <div class="item-icon-container">
+                                        <img class="item-icon" src="{% static 'core/svg/account.svg' %}" alt="transaction icon">
+                                    </div>
+                                    <div class="item-name-description">
+                                        <div class="item-name">
+                                            {{ transaction.category.name }}
+                                        </div>
+                                        <div class="item-account">
+                                            {{ transaction.account.name }}
+                                        </div>
+                                        <div class="item-description">
+                                            {{ transaction.description }}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="item-name-description">
-                                    <div class="item-name">
-                                        {{ transaction.category.name }}
-                                    </div>
-                                    <div class="item-account">
-                                        {{ transaction.account.name }}
-                                    </div>
-                                    <div class="item-description">
-                                        {{ transaction.description }}
-                                    </div>
+                                {% if transaction.transaction_type == "E" %}
+                                <div class="item-balance expense-amount">
+                                    - {{ transaction.amount }} {{ transaction.currency.code }}
                                 </div>
+                                {% elif transaction.transaction_type == "I"%}
+                                <div class="item-balance income-amount">
+                                    + {{ transaction.amount }} {{ transaction.currency.code }}
+                                </div>
+                                {% else %}
+                                <div class="item-balance transfer-amount">
+                                    - {{ transaction.amount }} {{ transaction.currency.code }}
+                                </div>
+                                {% endif %}
+        
                             </div>
-                            {% if transaction.transaction_type == "E" %}
-                            <div class="item-balance expense-amount">
-                                - {{ transaction.amount }} {{ transaction.currency.code }}
-                            </div>
-                            {% elif transaction.transaction_type == "I"%}
-                            <div class="item-balance income-amount">
-                                + {{ transaction.amount }} {{ transaction.currency.code }}
-                            </div>
-                            {% else %}
-                            <div class="item-balance transfer-amount">
-                                - {{ transaction.amount }} {{ transaction.currency.code }}
-                            </div>
-                            {% endif %}
-    
-                        </div>
+                        </a>
                     {% endfor %}
                 </div>
 
