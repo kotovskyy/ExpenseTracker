@@ -85,7 +85,7 @@
     padding: 5px;
     border-radius: 100%;
     border: none;
-    transform: background-color 0.2s;
+    transition: background-color 0.2s;
 }
 
 .choose-next-period-button:hover {
@@ -139,6 +139,11 @@
     padding: 20px;
 
     border-radius: 100%;
+    transition: background-color 0.2s;
+}
+
+#central-info:hover {
+    background-color: #bd83b8;
 }
 
 .central-info-label {
@@ -252,4 +257,8 @@
 
 .add-category-label {
     margin-top: 0px;
+}
+
+.category-container-button {
+    cursor: pointer;
 }
