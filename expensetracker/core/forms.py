@@ -197,6 +197,11 @@ class AddNewCategoryForm(forms.Form):
         initial=EXPENSE,
         widget=forms.Select(attrs={'class': 'form-field'})
     )
+    
+    def __init__(self, def_type=None, *args, **kwargs):
+        super(AddNewCategoryForm, self).__init__(*args, **kwargs)
+        if def_type is not None:
+            self.fields['category_type'].initial = def_type
 
 class SettingsForm(forms.Form):
     main_currency = forms.ChoiceField(

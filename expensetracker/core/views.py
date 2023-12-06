@@ -270,8 +270,10 @@ def deleteCategory(request, category_id):
 @login_required
 def addCategory(request):
     user = request.user
+    ref_type = request.META['HTTP_REFERER'].split('=')[-1]
+    default_type = "I" if ref_type=="income" else "E"
     if request.method == 'POST':
-        form = AddNewCategoryForm(request.POST)
+        form = AddNewCategoryForm(None, request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
             name = name[0].upper() + name[1:]
@@ -290,7 +292,7 @@ def addCategory(request):
                 'form': form,
             })
         
-    form = AddNewCategoryForm()
+    form = AddNewCategoryForm(default_type)
     return render(request, 'core/add_category.html', context={
         'form': form,
     })
