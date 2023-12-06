@@ -30,6 +30,14 @@ function openCategoryPage(category_id){
     window.location.href = `/categories/${cat_id}/`;
 }
 
+function openIncomePage() {
+    window.location.href = `/categories/?type=income`
+}
+
+function openExpensePage() {
+    window.location.href = `/categories/?type=expense`
+}
+
 function editCategory(category_id){
     let form = document.getElementById("editCategoryForm_"+category_id);
     form.submit();
