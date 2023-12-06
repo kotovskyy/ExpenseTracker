@@ -63,7 +63,7 @@
                             {% csrf_token %}
                             <div class="form-label-field">
                                 <div class="form-field-name">
-                                    From:
+                                    {{ account_label }}
                                 </div>
                                 {% for error in form.account.errors %}
                                     <div class="error-message">{{ error }}</div>

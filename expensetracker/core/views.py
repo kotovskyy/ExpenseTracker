@@ -157,6 +157,8 @@ def category(request, category_id):
     category = user.categories.get(id=category_id)
     t_type = category.category_type
     
+    account_label = "From:" if t_type == "E" else "To:"
+    
     # get period of time (month) to filter data
     month_number = int(request.GET.get('month', datetime.date.today().month))
     year = int(request.GET.get('year', datetime.date.today().year))
@@ -202,7 +204,8 @@ def category(request, category_id):
                 'n_transactions': transactions.count(),
                 "month_name": month_name,
                 "year":year,
-                "date_transactions": date_transactions
+                "date_transactions": date_transactions,
+                "account_label":account_label
             })
             
     form = AddTransactionCategoryForm(user, t_type, category_id)
@@ -215,7 +218,8 @@ def category(request, category_id):
         'n_transactions': transactions.count(),
         "month_name": month_name,
         "year":year,
-        "date_transactions": date_transactions
+        "date_transactions": date_transactions,
+        "account_label":account_label
     })
     
 @login_required
