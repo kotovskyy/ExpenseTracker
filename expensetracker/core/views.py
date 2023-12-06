@@ -32,7 +32,8 @@ def transaction_dates(transactions):
         d[0].day,
         d[0].strftime("%B"),
         d[0].year,
-        d[0]) for d in transactions.distinct().values_list("date")]
+        d[0]) for d in transactions.order_by("date").distinct("date").values_list("date")]
+    print(dates)
     date_transactions = {date:[] for date in dates}
     for date in dates:
         for t in transactions:
