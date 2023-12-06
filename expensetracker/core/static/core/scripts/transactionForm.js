@@ -9,8 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("transaction_type").addEventListener("change", function () {
-        console.log("Executed")
         var selectedType = this.value;
+        if (selectedType === "I") {
+            document.getElementById("where-to-label").innerHTML = "From:";
+        }
+        if (selectedType === "E") {
+            document.getElementById("where-to-label").innerHTML = "To:";
+        }
         var categorySelect = document.getElementById("id_category");
         var categoryOptions = categorySelect.options;
     
