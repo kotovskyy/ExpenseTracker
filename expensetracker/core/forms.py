@@ -72,8 +72,9 @@ class AddTransactionCategoryForm(AddTransactionForm):
 class AddTransactionAccountForm(AddTransactionForm):
     def __init__(self, user, t_type, account_id=None, *args, **kwargs):
         super(AddTransactionAccountForm, self).__init__(*args, **kwargs)
+        account = Account.objects.get(id=account_id)
         self.fields['account'].initial = account_id
-
+        self.fields['currency'].initial = account.currency.id
         self.fields['category'].choices = \
                 [(c.id, c.name) for c in user.categories.all().order_by('id')]
         
