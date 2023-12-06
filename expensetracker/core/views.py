@@ -12,7 +12,8 @@ from .forms import (AddNewAccountForm,
                     AddTransactionAccountForm,
                     EditCategoryForm,
                     EditAccountForm,
-                    EditTransactionForm)
+                    EditTransactionForm,
+                    SettingsForm)
 
 from decimal import Decimal
 import datetime
@@ -536,3 +537,26 @@ def deleteTransaction(request, transaction_id):
         transaction.delete()
         
     return HttpResponseRedirect(reverse('core_categories'))
+
+@login_required
+def settings(request):
+    user = request.user
+    settings = user.settings.first()
+    if request.method == 'POST':
+        form = SettingsForm(user, request.POST)
+        if form.is_valid():
+            main_currency_id = form.cleaned_data['main_currency']
+            new_currency = Currency.objects.get(id=main_currency_id)
+            settings.main_currency = new_currency
+            
+            settings.save()
+            
+            return HttpResponseRedirect(reverse('core_settings'))
+        else:
+            return render(request, 'core/settings.html', context={
+                'form': form,
+            })
+    form = SettingsForm(user)
+    return render(request, 'core/settings.html', context={
+        'form': form,
+    })
