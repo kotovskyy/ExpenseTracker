@@ -146,7 +146,6 @@ def transactions(request):
     date_transactions = transaction_dates(transactions)
     
     return render(request, 'core/transactions.html', context={
-        'transactions': transactions,
         "month_name": month_name,
         "year":year,
         "date_transactions": date_transactions
@@ -156,7 +155,7 @@ def transactions(request):
 def category(request, category_id):
     user = request.user
     category = user.categories.get(id=category_id)
-    t_type = "E"
+    t_type = category.category_type
     
     # get period of time (month) to filter data
     month_number = int(request.GET.get('month', datetime.date.today().month))
