@@ -86,7 +86,7 @@ body{
     padding: 8px 30px 8px 30px;
     margin-left: 20px;
 
-    color: #f5d7db;
+    color: #f5d7db; 
     text-decoration: none;
 
     transition: background-color 0.2s, padding 0.2s;
@@ -95,6 +95,29 @@ body{
 .header-navigation-link:hover {
     background-color: #f1916d;
     padding: 15px 30px 15px 30px;
+}
+
+.header-nav-icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 80px;
+    margin-right: 20px;
+}
+
+.header-nav-icon-container a {
+    padding: 0px;
+}
+
+.header-nav-icon-container a:hover {
+    padding: 8px 15px 8px 15px;
+}
+
+.header-nav-icon {
+    height: 40px;
+    width: 40px;
 }
 
 
