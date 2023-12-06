@@ -53,9 +53,20 @@ def index(request):
 def categories(request):
     user = request.user
     main_currency = user.settings.first().main_currency
-    categories = user.categories.filter(category_type='E').order_by('id')
-    
-        # get period of time (month) to filter data
+    categories_type = request.GET.get('type', 'expense')
+    categories = []
+    page_type = ""
+    page_to_render = ""
+    if categories_type == 'expense':
+        page_type = "Expenses"
+        page_to_render = "categories_expense"
+        categories = user.categories.filter(category_type='E').order_by('id')
+    elif categories_type == 'income':
+        page_type = "Incomes"
+        page_to_render = "categories_income"
+        categories = user.categories.filter(category_type='I').order_by('id')
+        
+    # get period of time (month) to filter data
     month_number = int(request.GET.get('month', datetime.date.today().month))
     year = int(request.GET.get('year', datetime.date.today().year))
     month_name = calendar.month_name[month_number]
@@ -67,7 +78,15 @@ def categories(request):
         transaction_type="I"
     )
     
+    expense_transactions = Transaction.objects.filter(
+        user=user,
+        date__month=month_number,
+        date__year=year,
+        transaction_type="E"
+    )
+    
     total_income = sum([convert_amount(t.amount, t.currency, main_currency) for t in income_transactions])
+    total_expense = sum([convert_amount(t.amount, t.currency, main_currency) for t in expense_transactions])
     
     categories_total = []
     
@@ -81,17 +100,18 @@ def categories(request):
             total += convert_amount(t.amount, t.currency, main_currency)
         categories_total.append(total)
     
-    total_expense = sum(categories_total)
-    categories_expenses = list(zip(categories, categories_total)) 
+    # total_expense = sum(categories_total)
+    categories_totals = list(zip(categories, categories_total)) 
     
-    return render(request, 'core/categories.html', context={
+    return render(request, f'core/{page_to_render}.html', context={
         'categories': categories,
         "main_currency": main_currency,
         "total_expense": total_expense,
         "total_income": total_income,
         "month_name": month_name,
         "year":year,
-        "categories_expenses" : categories_expenses,
+        "categories_expenses" : categories_totals,
+        "page_type": page_type,
     })
     
 @login_required
