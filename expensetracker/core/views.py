@@ -235,12 +235,29 @@ def editCategory(request, category_id):
     if request.method == 'POST':
         form = EditCategoryForm(user, category, request.POST)
         if form.is_valid():
+            prev_type = category.category_type
             new_name = form.cleaned_data['name']
             new_name = new_name[0].upper() + new_name[1:]
             new_type = form.cleaned_data['category_type']
             
             category.name = new_name
             category.category_type = new_type
+            
+            if prev_type != new_type:
+                for t in category.transactions.all():
+                    account = t.account
+                    conv_amount = convert_amount(t.amount, t.currency, account.currency)
+                    t.transaction_type = new_type
+                    
+                    # transaction amount must be added/subracted 2 times
+                    # because we need to get back to prev account state
+                    # and then apply new transaction changes
+                    if prev_type == "E":
+                        account.balance += 2 * conv_amount 
+                    elif prev_type == "I":
+                        account.balance -= 2 * conv_amount 
+                    account.save()
+                    t.save()
             
             category.save()
         else:
