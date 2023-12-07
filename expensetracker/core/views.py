@@ -190,7 +190,12 @@ def category(request, category_id):
                 description=description
             )
             
-            account.balance -= amount
+            conv_amount = convert_amount(amount, currency, account.currency)
+            
+            if t_type == "E":
+                account.balance -= conv_amount
+            elif t_type == "I":
+                account.balance += conv_amount
             
             account.save()
             
@@ -253,11 +258,13 @@ def deleteCategory(request, category_id):
             account = t.account
             amount = t.amount
             currency = t.currency
-            amount_converted = convert_amount(amount, currency, main_currency)
+            amount_converted = convert_amount(amount, currency, account.currency)
+            cat_type = category.category_type
             
-            sign = -1 if t.transaction_type == "I" else 1
-            
-            account.balance += sign * amount_converted
+            if cat_type == "E":
+                account.balance += amount_converted
+            elif cat_type == "I":
+                account.balance -= amount_converted       
 
             account.save()
             
@@ -346,11 +353,13 @@ def account(request, account_id):
                 description=description
             )
             
+            conv_amount = convert_amount(amount, currency, account.currency)
+            
             # expense
             if t_type == "E":
-                account.balance -= amount
+                account.balance -= conv_amount
             if t_type == "I":
-                account.balance += amount
+                account.balance += conv_amount
         
             account.save()
             
