@@ -11,6 +11,16 @@ class Icon(models.Model):
         return self.path.split('/')[-1]
 
 
+class Color(models.Model):
+    hex_value = models.CharField(
+        max_length=7,
+        unique=True
+    )
+    
+    def __str__(self):
+        return self.hex_value
+
+
 class Currency(models.Model):
     code = models.CharField(
         max_length=3,

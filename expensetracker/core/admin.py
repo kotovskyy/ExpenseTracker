@@ -4,7 +4,8 @@ from .models import (Currency,
                      Account,
                      Category,
                      Transaction,
-                     Icon)
+                     Icon,
+                     Color)
 
 # Register your models here.
-admin.site.register([Currency, Settings, Account, Category, Transaction, Icon])
+admin.site.register([Currency, Settings, Account, Category, Transaction, Icon, Color])
