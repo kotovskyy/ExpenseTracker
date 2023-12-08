@@ -70,6 +70,10 @@ class Category(models.Model):
         choices=CATEGORY_TYPE_CHOICES,
         default=EXPENSE
     )
+    icon = models.ForeignKey(
+        Icon,
+        on_delete=models.DO_NOTHING 
+    )
     
     def __str__(self) -> str:
         return f"{self.user.username} {self.name}"
