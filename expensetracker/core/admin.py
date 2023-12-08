@@ -3,7 +3,8 @@ from .models import (Currency,
                      Settings,
                      Account,
                      Category,
-                     Transaction)
+                     Transaction,
+                     Icon)
 
 # Register your models here.
-admin.site.register([Currency, Settings, Account, Category, Transaction])
+admin.site.register([Currency, Settings, Account, Category, Transaction, Icon])

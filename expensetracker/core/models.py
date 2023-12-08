@@ -5,6 +5,12 @@ import datetime
 
 from .validators import positive_decimal_validator
 
+class Icon(models.Model):
+    path = models.CharField(max_length=255)
+    def __str__(self):
+        return self.path.split('/')[-1]
+
+
 class Currency(models.Model):
     code = models.CharField(
         max_length=3,
@@ -152,8 +158,3 @@ class Transaction(models.Model):
         return f"{self.category.name} {self.account.name} \
                 {amount_sign + str(self.amount)} {self.currency.code}"
 
-
-class Icon(models.Model):
-    path = models.TextField(max_length=255)
-    def __str__(self):
-        return self.name.split('/')[-1]
