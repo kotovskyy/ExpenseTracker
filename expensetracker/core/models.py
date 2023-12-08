@@ -151,3 +151,9 @@ class Transaction(models.Model):
             amount_sign = ""
         return f"{self.category.name} {self.account.name} \
                 {amount_sign + str(self.amount)} {self.currency.code}"
+
+
+class Icon(models.Model):
+    path = models.TextField(max_length=255)
+    def __str__(self):
+        return self.name.split('/')[-1]
