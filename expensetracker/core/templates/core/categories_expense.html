@@ -75,7 +75,7 @@
                             {{ category.name }}
                         </div>
                         <div class="category-icon-container">
-                            <img class="category-icon" src="{% static 'core/svg/groceries.svg' %}" alt="category image">
+                            <img class="category-icon" src="{% static category.icon.path %}" alt="category image">
                         </div>
                         <div class="category-total">
                             {{ total }} {{ main_currency.code }}
