@@ -84,6 +84,10 @@ class Category(models.Model):
         Icon,
         on_delete=models.DO_NOTHING 
     )
+    color = models.ForeignKey(
+        Color,
+        on_delete=models.DO_NOTHING
+    )
     
     def __str__(self) -> str:
         return f"{self.user.username} {self.name}"

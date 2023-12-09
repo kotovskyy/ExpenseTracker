@@ -74,7 +74,7 @@
                         <div class="category-name">
                             {{ category.name }}
                         </div>
-                        <div class="category-icon-container">
+                        <div class="category-icon-container" style="background-color: {{ category.color.hex_value }};">
                             <img class="category-icon" src="{% static category.icon.path %}" alt="category image">
                         </div>
                         <div class="category-total">
