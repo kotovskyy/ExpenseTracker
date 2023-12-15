@@ -87,7 +87,7 @@ class Category(models.Model):
     color = models.ForeignKey(
         Color,
         on_delete=models.DO_NOTHING,
-        default="#bd83b8"
+        default=Color.objects.get(hex_value="#bd83b8".casefold()).id
     )
     
     def __str__(self) -> str:
