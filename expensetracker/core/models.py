@@ -86,7 +86,8 @@ class Category(models.Model):
     )
     color = models.ForeignKey(
         Color,
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
+        default="#bd83b8"
     )
     
     def __str__(self) -> str:
