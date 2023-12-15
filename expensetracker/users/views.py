@@ -6,7 +6,8 @@ from django.contrib import messages
 from .forms import (SignupForm)
 from .models import User
 from core.models import (Settings,
-                         Category)
+                         Category,
+                         Icon)
 
 def userLogin(request):
     if request.method == 'POST':
@@ -35,7 +36,12 @@ def userLogin(request):
 
 def userSignUp(request):
     BASE_EXPENSE_CATEGORIES = ["Groceries", "Transport", "Home", "Clothes", "Health"]
-    BASE_INCOME_CATEGORIES = ["Salary",]
+    BASE_EXPENSE_CATEGORIES = [("Groceries", Icon.objects.get(path="core/icons/category_1.svg")),
+                               ("Transport", Icon.objects.get(path="core/icons/category_5.svg")),
+                               ("Home", Icon.objects.get(path="core/icons/category_3.svg")),
+                               ("Clothes", Icon.objects.get(path="core/icons/category_6.svg")),
+                               ("Health", Icon.objects.get(path="core/icons/category_4.svg"))]
+    BASE_INCOME_CATEGORIES = [("Salary", Icon.objects.get(path="core/icons/account_2.svg")),]
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -43,16 +49,18 @@ def userSignUp(request):
             settings = Settings.objects.create(
                 user=user
             )
-            for c in BASE_EXPENSE_CATEGORIES:
+            for c, i in BASE_EXPENSE_CATEGORIES:
                 category = Category.objects.create(
                     user=user,
-                    name=c
+                    name=c,
+                    icon = i
                 )
-            for c in BASE_INCOME_CATEGORIES:
+            for c, i in BASE_INCOME_CATEGORIES:
                 category = Category.objects.create(
                     user=user,
                     name = c,
-                    category_type="I"
+                    category_type="I",
+                    icon = i
                 )
             messages.success(request,"You have signed up successfully!")
             login(request, user)
