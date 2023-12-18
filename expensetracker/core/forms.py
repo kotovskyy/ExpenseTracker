@@ -1,6 +1,6 @@
 from django import forms
 from datetime import date
-from .models import Account, Currency
+from .models import Account, Currency, Icon, Color
 
 class AddTransactionForm(forms.Form):
     INCOME = "I"
@@ -197,12 +197,23 @@ class AddNewCategoryForm(forms.Form):
         initial=EXPENSE,
         widget=forms.Select(attrs={'class': 'form-field'})
     )
+    icon = forms.ChoiceField(
+        choices=[(i.id, i.path) for i in Icon.objects.all()],
+        widget=forms.Select(attrs={'class': 'form-field'}),
+    )
+    color = forms.ChoiceField(
+        choices=[(c.id, c.hex_value.upper()) for c in Color.objects.all()],
+        widget=forms.Select(attrs={'class': 'form-field'})
+    )
     
     def __init__(self, def_type=None, *args, **kwargs):
         super(AddNewCategoryForm, self).__init__(*args, **kwargs)
         if def_type is not None:
             self.fields['category_type'].initial = def_type
-
+      
+        self.fields['color'].initial = Color.objects.get(hex_value="#bd83b8".casefold()).id
+        self.fields['icon'].initial = Icon.objects.first()
+        
 class SettingsForm(forms.Form):
     main_currency = forms.ChoiceField(
         choices=[(c.id, c.code) for c in Currency.objects.all()],
