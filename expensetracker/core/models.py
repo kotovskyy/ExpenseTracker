@@ -5,6 +5,22 @@ import datetime
 
 from .validators import positive_decimal_validator
 
+class Icon(models.Model):
+    path = models.CharField(max_length=255)
+    def __str__(self):
+        return self.path.split('/')[-1]
+
+
+class Color(models.Model):
+    hex_value = models.CharField(
+        max_length=7,
+        unique=True
+    )
+    
+    def __str__(self):
+        return self.hex_value
+
+
 class Currency(models.Model):
     code = models.CharField(
         max_length=3,
@@ -63,6 +79,15 @@ class Category(models.Model):
         max_length=1,
         choices=CATEGORY_TYPE_CHOICES,
         default=EXPENSE
+    )
+    icon = models.ForeignKey(
+        Icon,
+        on_delete=models.DO_NOTHING 
+    )
+    color = models.ForeignKey(
+        Color,
+        on_delete=models.DO_NOTHING,
+        default=Color.objects.get(hex_value="#bd83b8".casefold()).id
     )
     
     def __str__(self) -> str:
@@ -151,3 +176,4 @@ class Transaction(models.Model):
             amount_sign = ""
         return f"{self.category.name} {self.account.name} \
                 {amount_sign + str(self.amount)} {self.currency.code}"
+

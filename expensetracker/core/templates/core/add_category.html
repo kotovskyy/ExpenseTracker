@@ -68,7 +68,6 @@
                         {% endfor %}
                         {{ form.name }}
                     </div>
-
                     
                     <div class="form-label-field">
                         <div class="form-field-name">
@@ -79,7 +78,28 @@
                         {% endfor %}
                         {{ form.category_type }}    
                     </div>
-                    
+
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Icon:
+                        </div>
+                        {% for error in form.icon.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                        {{ form.icon }}
+                    </div>
+
+
+                    <div class="form-label-field">
+                        <div class="form-field-name">
+                            Color:
+                        </div>
+                        {% for error in form.color.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                        {{ form.color }}
+                    </div>
+
                     <input class="submit-button" type="submit" value="Create">
                 </form>
             </div>

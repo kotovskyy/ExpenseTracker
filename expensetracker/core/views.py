@@ -5,7 +5,9 @@ from django.urls import reverse
 from .models import (Currency,
                      Transaction,
                      Account,
-                     Category)
+                     Category,
+                     Icon,
+                     Color)
 from .forms import (AddNewAccountForm,
                     AddNewCategoryForm,
                     AddTransactionCategoryForm,
@@ -301,11 +303,17 @@ def addCategory(request):
             name = form.cleaned_data['name']
             name = name[0].upper() + name[1:]
             category_type = form.cleaned_data['category_type']
+            icon_id = form.cleaned_data['icon']
+            icon = Icon.objects.get(id=icon_id)
+            color_id = form.cleaned_data['color']
+            color = Color.objects.get(id=color_id)
             
             category = Category.objects.create(
                 user=user,
                 name=name,
-                category_type=category_type
+                category_type=category_type,
+                icon=icon,
+                color=color
             )
             
             return HttpResponseRedirect(reverse('core_categories'))
